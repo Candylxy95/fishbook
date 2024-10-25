@@ -1,0 +1,38 @@
+:root {
+  --black: #252525;
+  --offwhite: #fbfefb;
+  --white: rgb(249, 248, 245);
+  --nude: #efe5dc;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+li {
+  width: 20%;
+  font-family: "Red Hat Display", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
+  padding: 10px;
+  transition: color 0.3s ease, background 0.3s ease-in-out;
+}
+
+a:hover {
+  background-color: orangered;
+  color: var(--offwhite);
+  font-weight: 500;
+}
+
+a:active {
+  color: orangered;
+}
