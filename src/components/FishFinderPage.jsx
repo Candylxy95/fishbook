@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import FishCard from "./FishCard";
+import FishFinderList from "./FishFinderList";
 
 const FishFinderPage = () => {
   const [fishesData, setFishesData] = useState([]);
   const [displayFishCards, setDisplayFishCards] = useState([]);
+  const [showFishCard, setShowFishCard] = useState(true);
   const fishDataRef = useRef();
 
   const getFishesData = async () => {
@@ -48,6 +50,7 @@ const FishFinderPage = () => {
       fishData.name.toLowerCase().includes(inputKeyword)
     );
     setDisplayFishCards(matchingKeyword);
+    setShowFishCard(false);
     fishDataRef.current.value = "";
     console.log("this worked");
   };
@@ -66,35 +69,19 @@ const FishFinderPage = () => {
             GO
           </Button>
         </div>
-        <FishCard
-          className="fishCard"
-          src={randomFishQuest?.img_src_set["1.5x"] || "FIND ANOTHER FISH IMG"}
-          fishName={randomFishQuest?.name}
-          rarity={randomFishQuest?.meta.conservation_status || "NO STATUS"}
-          msg="Quest of the Day"
-        />
-        <div className="fishCardsDisplay">
-          {Array.isArray(displayFishCards) && displayFishCards.length > 0 ? (
-            displayFishCards.map((displayFishCard, idx) => {
-              return (
-                <FishCard
-                  id={idx}
-                  className="fishCardDisplay"
-                  src={
-                    displayFishCard?.img_src_set["1.5x"] ||
-                    "FIND ANOTHER FISH IMG"
-                  }
-                  fishName={displayFishCard?.name}
-                  rarity={
-                    displayFishCard?.meta.conservation_status || "NO STATUS"
-                  }
-                />
-              );
-            })
-          ) : (
-            <p>No fishy found</p>
-          )}
-        </div>
+        {showFishCard ? (
+          <FishCard
+            className="fishCard"
+            src={
+              randomFishQuest?.img_src_set["1.5x"] || "FIND ANOTHER FISH IMG"
+            }
+            fishName={randomFishQuest?.name}
+            rarity={randomFishQuest?.meta.conservation_status || "NO STATUS"}
+            msg="Quest of the Day"
+          />
+        ) : (
+          <FishFinderList displayFishCards={displayFishCards} />
+        )}
       </div>
     </>
   );
