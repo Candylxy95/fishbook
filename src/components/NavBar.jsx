@@ -21,7 +21,7 @@ const NavBar = () => {
             className={(navLink) => {
               navLink.isActive ? styles.active : "";
             }}
-            to="/"
+            to="/fishfinder"
           >
             Fish Finder
           </NavLink>
