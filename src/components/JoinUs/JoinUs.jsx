@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styles from "./JoinUs.module.css";
 import Button from "../Button";
 
 const JoinUs = () => {
+  const navigate = useNavigate();
   const [newUserInput, setNewUserInput] = useState({
     username: "",
     age: "",
     country: "",
     msg: "",
+    img: "./images/fishbook-logo.png",
   });
 
   const handleChange = (e) => {
@@ -31,6 +34,7 @@ const JoinUs = () => {
               age: Number(newUserInput.age),
               country: newUserInput.country,
               msg: newUserInput.msg,
+              img: newUserInput.img,
             },
           }),
         }
@@ -38,7 +42,14 @@ const JoinUs = () => {
       if (!res.ok) {
         throw new Error("getting data error");
       }
-      setNewUserInput({ username: "", age: "", country: "", msg: "" });
+      setNewUserInput({
+        username: "",
+        age: "",
+        country: "",
+        msg: "",
+        img: "./images/fishbook-logo.png",
+      });
+      navigate("/userprofiles");
     } catch (error) {
       console.error(error.message);
     }
@@ -46,7 +57,9 @@ const JoinUs = () => {
 
   return (
     <div className={styles.div}>
-      <h1>Join millions of Anglers today</h1>
+      <h1 style={{ width: "350px", textAlign: "center" }}>
+        Join our community of Anglers today
+      </h1>
       <div className={styles.formContainer}>
         <div className={styles.uploadPhoto}>
           <h1>UPLOAD PHOTO HERE</h1>

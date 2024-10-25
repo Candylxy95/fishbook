@@ -41,7 +41,7 @@ const NavBar = () => {
         <li>
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}
-            to="/"
+            to="/createpost"
           >
             Create Post
           </NavLink>

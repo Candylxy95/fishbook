@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button";
 
 const UserCard = (props) => {
   return (
@@ -14,6 +15,7 @@ const UserCard = (props) => {
         <p>{props.location}</p>
         <p>{props.msg}</p>
       </div>
+      <Button func={props.func}>Check Out</Button>
     </div>
   );
 };

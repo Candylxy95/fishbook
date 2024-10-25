@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
+import Button from "../Button";
 
 const UserProfiles = () => {
   const [userInputs, setUserInputs] = useState([]);
@@ -37,16 +38,18 @@ const UserProfiles = () => {
       <div className="userCards">
         {userInputs.map((userInput, idx) => {
           return (
-            <UserCard
-              key={idx}
-              className="userCard"
-              status="Master Angler"
-              src={userInput.fields.img}
-              userName={userInput.fields.username}
-              age={userInput.fields.age}
-              location={userInput.fields.country}
-              msg={userInput.fields.msg}
-            />
+            <>
+              <UserCard
+                key={idx}
+                className="userCard"
+                status="Master Angler"
+                src={userInput.fields.img}
+                userName={userInput.fields.username}
+                age={userInput.fields.age}
+                location={userInput.fields.country}
+                msg={userInput.fields.msg}
+              />
+            </>
           );
         })}
       </div>
@@ -55,3 +58,17 @@ const UserProfiles = () => {
 };
 
 export default UserProfiles;
+
+{
+  /* <div>
+<button
+  className={props.className}
+  style={props.style}
+  onClick={props.func}
+>
+  {props.children}
+</button>
+</div>
+);
+}; */
+}
