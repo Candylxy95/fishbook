@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import Button from "../Button";
 import FishCard from "./FishCard";
 import FishFinderList from "./FishFinderList";
 
@@ -44,15 +43,12 @@ const FishFinderPage = () => {
 
   const handleGo = () => {
     const inputKeyword = fishDataRef.current?.value.toLowerCase();
-    console.log(inputKeyword);
-    console.log(typeof inputKeyword);
     const matchingKeyword = fishesData.filter((fishData) =>
       fishData.name.toLowerCase().includes(inputKeyword)
     );
     setDisplayFishCards(matchingKeyword);
     setShowFishCard(false);
     fishDataRef.current.value = "";
-    console.log("this worked");
   };
 
   return (

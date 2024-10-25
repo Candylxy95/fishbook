@@ -9,6 +9,7 @@ const FishFinderList = (props) => {
         props.displayFishCards.map((displayFishCard, idx) => {
           return (
             <FishCard
+              key={idx}
               id={idx}
               className="fishCardDisplay"
               src={
@@ -20,7 +21,7 @@ const FishFinderList = (props) => {
           );
         })
       ) : (
-        <p>No fishy found</p>
+        <p className="text-center">No fishy found</p>
       )}
     </div>
   );

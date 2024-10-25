@@ -11,7 +11,7 @@ const NavBar = () => {
         <li>
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}
-            to="/"
+            to="/joinus"
           >
             Join Us
           </NavLink>
@@ -33,7 +33,7 @@ const NavBar = () => {
         <li>
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}
-            to="/"
+            to="/userprofiles"
           >
             Angler Community
           </NavLink>
