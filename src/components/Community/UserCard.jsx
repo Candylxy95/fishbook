@@ -1,15 +1,18 @@
 import React from "react";
 
-const UserCard = () => {
+const UserCard = (props) => {
   return (
     <div className={props.className}>
+      <h5 style={props.style}>{props.status}</h5>
       <div>
-        <h1>{props.msg}</h1>
         <img src={props.src} />
       </div>
       <div>
-        <h3>{props.userName}</h3>
-        <p>Age: {props.age}</p>
+        <h5>
+          {props.userName}, {props.age}
+        </h5>
+        <p>{props.location}</p>
+        <p>{props.msg}</p>
       </div>
     </div>
   );

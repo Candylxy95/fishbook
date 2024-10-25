@@ -38,9 +38,9 @@ const JoinUs = () => {
       if (!res.ok) {
         throw new Error("getting data error");
       }
+      setNewUserInput({ username: "", age: "", country: "", msg: "" });
     } catch (error) {
       console.error(error.message);
-      setNewUserInput({ username: "", age: "", country: "", msg: "" });
     }
   };
 
@@ -91,7 +91,18 @@ const JoinUs = () => {
             onChange={handleChange}
           />
         </div>
-        <Button func={addUserInput}>Join Now!</Button>
+        <Button
+          func={() =>
+            newUserInput.username &&
+            newUserInput.country &&
+            newUserInput.msg &&
+            Number(newUserInput.age)
+              ? addUserInput()
+              : alert("Please fill in all fields and enter number for age")
+          }
+        >
+          Join Now!
+        </Button>
       </div>
     </div>
   );
