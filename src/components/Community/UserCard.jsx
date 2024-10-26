@@ -5,7 +5,7 @@ const UserCard = (props) => {
   return (
     <div className={props.className}>
       <h5 style={props.style}>{props.status}</h5>
-      <div>
+      <div className="userCardImg">
         <img src={props.src} />
       </div>
       <div>

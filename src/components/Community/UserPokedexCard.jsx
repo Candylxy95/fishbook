@@ -9,10 +9,19 @@ const UserPokedexCard = (props) => {
         <img src={props.src} />
       </div>
       <div>
-        <p>{props.location}</p>
-        <p>{props.msg}</p>
+        <span>
+          Caught: <h5>{props.fishtype}</h5>
+        </span>
       </div>
-      <Button func={props.func}>Profile</Button>
+      <div>
+        <p>Fight: {props.fightrate}</p>
+        <p>Location: {props.location}</p>
+      </div>
+      <p>{props.msg}</p>
+      <div>
+        <p>{props.date}</p>
+        <p>{props.username}</p>
+      </div>
     </div>
   );
 };

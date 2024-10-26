@@ -84,7 +84,7 @@ const CreatePost = () => {
             fishtype: newPost.fishtype,
             location: newPost.location,
             date: newPost.date,
-            fightrate: Number(newPost.fightrate),
+            fightrate: newPost.fightrate,
             msg: newPost.msg,
             img: newPost.img,
             "Table 1": [newPost["Table 1"]],
@@ -193,11 +193,11 @@ const CreatePost = () => {
               onChange={handleChange}
             >
               <option value="">Select a rating</option>
-              <option value="1">1 - Easy</option>
-              <option value="2">2 - Moderate</option>
-              <option value="3">3 - Challenging</option>
-              <option value="4">4 - Intense</option>
-              <option value="5">5 - Brutal</option>
+              <option value="Easy">Easy</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Challenging">Challenging</option>
+              <option value="Intense">Intense</option>
+              <option value="Brutal">Brutal</option>
             </select>
           </div>
         </div>

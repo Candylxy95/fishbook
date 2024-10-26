@@ -48,7 +48,7 @@ const UserProfiles = () => {
               <UserCard
                 key={idx}
                 className="userCard"
-                status="Master Angler"
+                status={userInput.fields.anglerstatus}
                 src={userInput.fields.img}
                 userName={userInput.fields.username}
                 age={userInput.fields.age}
@@ -65,17 +65,3 @@ const UserProfiles = () => {
 };
 
 export default UserProfiles;
-
-{
-  /* <div>
-<button
-  className={props.className}
-  style={props.style}
-  onClick={props.func}
->
-  {props.children}
-</button>
-</div>
-);
-}; */
-}

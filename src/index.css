@@ -7,11 +7,6 @@
   --nude: #efe5dc;
 }
 
-.homepage {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -161,7 +156,7 @@ h1 {
   margin-top: 50px;
   padding: 0 30px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 25%);
   column-gap: 30px;
   row-gap: 30px;
 }
@@ -171,11 +166,12 @@ h1 {
   background-color: var(--nude);
   display: grid;
   grid-template-rows: 15% 35% 40% 10%;
+  width: 100%;
   border-radius: 10px;
   height: 450px;
 }
 
-.userCard > :nth-child(2) {
+.userCardImg {
   text-align: center;
 }
 
@@ -205,3 +201,44 @@ display: grid;
 grid-template-columns: 30% 70%;
 align-items: center;
 */
+
+.userPokedexCard {
+  padding: 15px;
+  background-color: var(--nude);
+  display: grid;
+  grid-template-rows: 15% 35% 13% 10% 20% 17%;
+  border-radius: 10px;
+  height: 500px;
+}
+
+.userPokedexCard > :nth-child(4) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userPokedexCard > :nth-child(6) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userPokedexCard > :nth-child(2) {
+  text-align: center;
+}
+
+.userProfileCards {
+  width: 50%;
+  justify-self: center;
+  margin-top: 50px;
+}
+
+.userProfileCard {
+  padding: 15px;
+  background-color: var(--nude);
+  display: grid;
+  grid-template-rows: 15% 35% 40% 10%;
+  width: 100%;
+  border-radius: 10px;
+  height: 650px;
+}
