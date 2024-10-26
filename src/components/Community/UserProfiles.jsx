@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 import Button from "../Button";
+import { useNavigate } from "react-router-dom";
 
 const UserProfiles = () => {
+  const navigate = useNavigate();
   const [userInputs, setUserInputs] = useState([]);
 
   const getUserData = async () => {
@@ -24,6 +26,10 @@ const UserProfiles = () => {
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const handleClick = (userId) => {
+    navigate(`/UserPokedex/${userId}`);
   };
 
   useEffect(() => {
@@ -48,6 +54,7 @@ const UserProfiles = () => {
                 age={userInput.fields.age}
                 location={userInput.fields.country}
                 msg={userInput.fields.msg}
+                func={() => handleClick(userInput.id)}
               />
             </>
           );
