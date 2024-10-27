@@ -5,6 +5,8 @@ import Button from "../Button";
 
 const JoinUs = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState([]);
+  const [validation, setValidation] = useState("");
   const [newUserInput, setNewUserInput] = useState({
     username: "",
     age: "",
@@ -16,6 +18,41 @@ const JoinUs = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewUserInput((prevUserInput) => ({ ...prevUserInput, [name]: value }));
+  };
+
+  const handleUserChange = (e) => {
+    const { name, value } = e.target;
+    setNewUserInput((prevUserInput) => ({ ...prevUserInput, [name]: value }));
+    if (value === "") {
+      setValidation("");
+    } else if (
+      userData.find(
+        (user) => user.fields.username.toLowerCase() === value.toLowerCase() //REMOVE SPACES
+      )
+    ) {
+      setValidation("Unavailable");
+    } else setValidation("Available");
+  };
+
+  const getUserData = async () => {
+    try {
+      const res = await fetch(
+        import.meta.env.VITE_USERSERVER + "?maxRecords=100&view=Grid%20view",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_USERAPI_KEY}`,
+          },
+        }
+      );
+      if (!res.ok) {
+        throw new Error("getting data error");
+      }
+      const data = await res.json();
+      setUserData(data.records);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const addUserInput = async () => {
@@ -35,8 +72,6 @@ const JoinUs = () => {
               country: newUserInput.country,
               msg: newUserInput.msg,
               img: newUserInput.img,
-              fishcount: 0,
-              questcount: 0,
               anglerstatus: "Beginner",
             },
           }),
@@ -58,6 +93,10 @@ const JoinUs = () => {
     }
   };
 
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <div className={styles.div}>
       <h1 style={{ width: "350px", textAlign: "center" }}>
@@ -74,10 +113,17 @@ const JoinUs = () => {
             value={newUserInput.username}
             placeholder="Enter a username"
             type="text"
-            onChange={handleChange}
+            onChange={handleUserChange}
           />
+          {validation === "Available" ? (
+            <p style={{ color: "green" }}>Available</p>
+          ) : validation === "Unavailable" ? (
+            <p style={{ color: "red" }}>Unavailable</p>
+          ) : (
+            <p></p>
+          )}
         </div>
-        <div className={styles.forms}>
+        <div className={styles.forms} style={{ marginTop: "-20px" }}>
           <label htmlFor="age">Age: </label>
           <input
             name="age"

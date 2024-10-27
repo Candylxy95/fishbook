@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const CreatePost = () => {
+const CreatePostModal = (props) => {
+  const location = useLocation();
+  const defaultValue = location.state?.defaultValue || "Select a catch";
   const navigate = useNavigate();
   const [newPost, setNewPost] = useState({
     fishtype: "",
     location: "",
     date: "",
+    status: "",
     fightrate: "",
     msg: "",
     "Table 1": "",
@@ -15,6 +18,9 @@ const CreatePost = () => {
   });
   const [usersData, setUsersData] = useState([]);
   const [fishesData, setFishesData] = useState([]);
+  const [validation, setValidation] = useState(false);
+  const [nameInput, setNameInput] = useState("");
+  const [fishStatus, setFishStatus] = useState("");
 
   const getFishesData = async () => {
     try {
@@ -83,6 +89,7 @@ const CreatePost = () => {
           fields: {
             fishtype: newPost.fishtype,
             location: newPost.location,
+            status: fishStatus,
             date: newPost.date,
             fightrate: newPost.fightrate,
             msg: newPost.msg,
@@ -97,12 +104,15 @@ const CreatePost = () => {
       setNewPost({
         fishtype: "",
         location: "",
+        status: "",
         date: "",
         fightrate: "",
         msg: "",
         "Table 1": "",
         img: "./images/fishbook-logo.png",
       });
+      setNameInput("");
+      setFishStatus("");
       navigate("/");
     } catch (error) {
       console.error(error.message);
@@ -112,6 +122,55 @@ const CreatePost = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewPost((prevPost) => ({ ...prevPost, [name]: value }));
+  };
+
+  const handleFishChange = (e) => {
+    const { name, value } = e.target;
+    const fish = fishesData.find((fish) => fish.name === e.target.value);
+    setNewPost((prevPost) => ({ ...prevPost, [name]: value }));
+    let status = "";
+    if (fish && fish.meta.conservation_status?.includes("Least Concern")) {
+      status = "Abundant";
+    } else if (fish && fish.meta.conservation_status?.includes("secure")) {
+      status = "Common";
+    } else if (
+      fish &&
+      fish.meta.conservation_status?.includes("Near Threatened")
+    ) {
+      status = "Uncommon";
+    } else if (fish && fish.meta.conservation_status?.includes("Vulnerable")) {
+      status = "Rare";
+    } else if (fish && fish.meta.conservation_status?.includes("Endangered")) {
+      status = "Very Rare";
+    } else if (
+      fish &&
+      fish.meta.conservation_status?.includes("Critically Endangered")
+    ) {
+      status = "Extremely Rare";
+    } else if (fish) {
+      status = "Mysterious";
+    } else {
+      status = "";
+    }
+    setFishStatus(status);
+  };
+
+  const handleNameChange = (e) => {
+    setNameInput(e.target.value);
+    const user = usersData.find(
+      (user) => user.fields.username === e.target.value
+    );
+    if (user) {
+      setValidation(true);
+      setNewPost((prevPost) => ({ ...prevPost, ["Table 1"]: user.id }));
+    } else {
+      setValidation(false);
+      setNewPost((prevPost) => ({ ...prevPost, ["Table 1"]: "" }));
+    }
+  };
+
+  const handleCancel = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -127,34 +186,33 @@ const CreatePost = () => {
       <div className="createPostForm">
         <div className="createPostInput">
           <label>Upload your catch: </label>
-          <input name="img" type="file" onChange={handleChange} />
+          <input name="img" type="file" />
         </div>
         <div className="createPostInput">
-          <label>User: </label>
-          <select
-            name="Table 1"
-            onChange={handleChange}
-            value={newPost["Table 1"]}
-          >
-            <option value="">Select your Username</option>
-            {usersData.map((userData, idx) => {
-              return (
-                <option key={idx} value={userData.id}>
-                  {userData.fields.username}
-                </option>
-              );
-            })}
-          </select>
+          <label>Username: </label>
+          <input
+            name="username"
+            placeholder="Enter your username"
+            value={nameInput}
+            onChange={handleNameChange}
+          />
+          <div>
+            {validation ? (
+              <p style={{ color: "green" }}>Valid User</p>
+            ) : (
+              <p style={{ color: "red" }}>Invalid User</p>
+            )}
+          </div>
         </div>
         <div className="createPostInput">
           <label>Species: </label>
           <select
             name="fishtype"
             type="text"
-            onChange={handleChange}
-            value={newPost.fishtype}
+            onChange={handleFishChange}
+            value={newPost.fishtype || defaultValue}
           >
-            <option value="">Select a Catch</option>
+            <option value={defaultValue}>{defaultValue}</option>
             {fishesData.map((fishData, idx) => {
               return (
                 <option key={idx} value={fishData.name}>
@@ -163,6 +221,7 @@ const CreatePost = () => {
               );
             })}
           </select>
+          <p style={{ color: "green" }}>{fishStatus}</p>
         </div>
         <div className="createPostInput">
           <label>Location: </label>
@@ -209,11 +268,18 @@ const CreatePost = () => {
             onChange={handleChange}
             value={newPost.msg}
           />
+          <div className="questModalBtnContainer">
+            <button className="questModalBtn" onClick={addPost}>
+              Create Post!
+            </button>
+            <button className="questModalBtn" onClick={handleCancel}>
+              Cancel
+            </button>
+          </div>
         </div>
-        <Button func={addPost}>Submit</Button>
       </div>
     </div>
   );
 };
 
-export default CreatePost;
+export default CreatePostModal;

@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../Button";
 
 const UserPokedexCard = (props) => {
   return (
@@ -10,7 +9,11 @@ const UserPokedexCard = (props) => {
       </div>
       <div>
         <span>
-          Caught: <h5>{props.fishtype}</h5>
+          Caught:{" "}
+          <h5>
+            {props.fishtype}{" "}
+            <p style={{ fontSize: "16px" }}>{props.fishstatus}</p>
+          </h5>
         </span>
       </div>
       <div>

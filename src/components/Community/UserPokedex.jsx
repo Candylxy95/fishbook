@@ -3,10 +3,12 @@ import UserCard from "./UserCard";
 import UserPokedexCard from "./UserPokedexCard";
 import { useParams } from "react-router-dom";
 import Stats from "./Stats";
+import QuestList from "./QuestList";
 
 const UserPokedex = () => {
   const [userAcc, setUserAcc] = useState([]);
   const [postData, setPostData] = useState([]);
+  const [questData, setQuestData] = useState([]);
   const { id } = useParams();
 
   const getUserData = async () => {
@@ -48,9 +50,31 @@ const UserPokedex = () => {
     }
   };
 
+  const getQuestData = async () => {
+    try {
+      const res = await fetch(
+        import.meta.env.VITE_USERQUESTS + "?maxRecords=100&view=Grid%20view",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_USERAPI_KEY}`,
+          },
+        }
+      );
+      if (!res.ok) {
+        throw new Error("getting data error");
+      }
+      const data = await res.json();
+      setQuestData(data.records);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   useEffect(() => {
     getUserData();
     getPostData();
+    getQuestData();
   }, []);
 
   return userAcc.map((user, idx) => {
@@ -58,10 +82,14 @@ const UserPokedex = () => {
       post.fields["Table 1"]?.includes(user.id)
     );
 
+    const userQuests = questData.find((quest) =>
+      quest.fields["Table 1"]?.includes(user.id)
+    );
+
     return (
       <>
         <div className="userProfileCards" key={idx}>
-          <h1>{user.fields.username}'s Fishdex</h1>
+          <h1>{user.fields.username}'s FishDex</h1>
           <UserCard
             className="userProfileCard"
             status={
@@ -90,6 +118,10 @@ const UserPokedex = () => {
               user.fields.questlist ? user.fields.questlist?.length : 0
             }
           />
+          <QuestList
+            className="stats"
+            fishtype={userQuests?.fields.fishquest}
+          />
           {userPost && (
             <UserPokedexCard
               className="userPokedexCard"
@@ -99,6 +131,7 @@ const UserPokedex = () => {
               location={userPost.fields.location}
               msg={userPost.fields.msg}
               date={userPost.fields.date}
+              fishstatus={userPost.fields.status}
             />
           )}
         </div>

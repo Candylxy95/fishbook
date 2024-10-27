@@ -62,7 +62,7 @@ const Home = () => {
               className="userPokedexCard"
               status={
                 userData.find((user) => user.fields.posts?.includes(post.id))
-                  ?.fields.posts?.length > 1 &&
+                  ?.fields.posts?.length > 10 &&
                 userData.find((user) => user.fields.posts?.includes(post.id))
                   ?.fields.posts?.length <= 20
                   ? "Amateur"
@@ -96,6 +96,7 @@ const Home = () => {
                 userData.find((user) => user.fields.posts?.includes(post.id))
                   ?.fields.age
               }
+              fishstatus={post.fields.status}
               location={post.fields.location}
               msg={post.fields.msg}
               src={post.fields.img}
@@ -109,7 +110,7 @@ const Home = () => {
               }
               questcount={
                 userData.find((user) => user.fields.posts?.includes(post.id))
-                  ?.fields.questcount
+                  ?.fields.questlist?.length || 0
               }
             />
           </div>

@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import Button from "../Button";
 import FishCard from "./FishCard";
 import FishFinderList from "./FishFinderList";
-
+import QuestModal from "../QuestModal";
+import { Navigate, useNavigate } from "react-router-dom";
 const FishFinderPage = () => {
+  const [showQuestModal, setShowQuestModal] = useState(false);
+  const [selectedFish, setSelectedFish] = useState(""); //log fishtype name here
   const [fishesData, setFishesData] = useState([]);
   const [displayFishCards, setDisplayFishCards] = useState([]);
   const [showFishQuestCard, setShowFishQuestCard] = useState(true);
   const fishDataRef = useRef();
+  const navigate = useNavigate();
 
   const getFishesData = async () => {
     try {
@@ -47,12 +50,28 @@ const FishFinderPage = () => {
     fishDataRef.current.value = "";
   };
 
+  const handleQuestClick = (fishType) => {
+    setSelectedFish(fishType);
+    setShowQuestModal(true);
+  };
+
+  const handleCompleteClick = (fishType) => {
+    setSelectedFish(fishType);
+    navigate("/createpost", { state: { defaultValue: fishType } });
+  };
+
   useEffect(() => {
     getFishesData();
   }, []);
 
   return (
     <>
+      {showQuestModal && (
+        <QuestModal
+          fishtype={selectedFish}
+          setShowQuestModal={setShowQuestModal}
+        />
+      )}
       <div className="fishFinderPage">
         <div className="fishFinderBar">
           <input
@@ -158,6 +177,8 @@ const FishFinderPage = () => {
               )
             }
             msg="Quest of the Moment"
+            questClick={() => handleQuestClick(randomFishQuest?.name)}
+            completeClick={() => handleCompleteClick(randomFishQuest?.name)}
           />
         ) : (
           <FishFinderList displayFishCards={displayFishCards} />
