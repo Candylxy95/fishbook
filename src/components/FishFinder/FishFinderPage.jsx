@@ -6,8 +6,7 @@ import FishFinderList from "./FishFinderList";
 const FishFinderPage = () => {
   const [fishesData, setFishesData] = useState([]);
   const [displayFishCards, setDisplayFishCards] = useState([]);
-  const [showFishCard, setShowFishCard] = useState(true);
-  const [btnClicked, setBtnClicked] = useState(false);
+  const [showFishQuestCard, setShowFishQuestCard] = useState(true);
   const fishDataRef = useRef();
 
   const getFishesData = async () => {
@@ -44,12 +43,8 @@ const FishFinderPage = () => {
       fishData.name.toLowerCase().includes(inputKeyword)
     );
     setDisplayFishCards(matchingKeyword);
-    setShowFishCard(false);
+    setShowFishQuestCard(false);
     fishDataRef.current.value = "";
-  };
-
-  const handleBtnClick = () => {
-    setBtnClicked(true);
   };
 
   useEffect(() => {
@@ -66,11 +61,11 @@ const FishFinderPage = () => {
             placeholder="Search fishes..."
             ref={fishDataRef}
           />
-          <Button className="fishFinderBtn" func={handleGo}>
+          <button className="fishFinderBtn" onClick={handleGo}>
             GO
-          </Button>
+          </button>
         </div>
-        {showFishCard ? (
+        {showFishQuestCard ? (
           <FishCard
             className="fishCard"
             src={
@@ -163,8 +158,6 @@ const FishFinderPage = () => {
               )
             }
             msg="Quest of the Moment"
-            func={handleBtnClick}
-            children={btnClicked ? "Added" : "Quest On"}
           />
         ) : (
           <FishFinderList displayFishCards={displayFishCards} />

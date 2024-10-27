@@ -48,7 +48,20 @@ const UserProfiles = () => {
               <UserCard
                 func={() => handleClick(userInput.id)}
                 className="userCard"
-                status={userInput.fields.anglerstatus}
+                status={
+                  userInput.fields.posts?.length > 10 &&
+                  userInput.fields.posts?.length <= 20
+                    ? "Amateur"
+                    : userInput.fields.posts?.length > 20 &&
+                      userInput.fields.posts?.length <= 50
+                    ? "Adept"
+                    : userInput.fields.posts?.length > 50 &&
+                      userInput.fields.posts?.length <= 100
+                    ? "Master"
+                    : userInput.fields.posts?.length > 100
+                    ? "Master"
+                    : "Beginner"
+                }
                 src={userInput.fields.img}
                 userName={userInput.fields.username}
                 age={userInput.fields.age}
@@ -60,7 +73,11 @@ const UserProfiles = () => {
                 fishcount={
                   userInput.fields.posts ? userInput.fields.posts.length : 0
                 }
-                questcount={userInput.fields.questcount}
+                questcount={
+                  userInput.fields.questlist
+                    ? userInput.fields.questlist?.length
+                    : 0
+                }
               />
             </div>
           );
@@ -71,12 +88,3 @@ const UserProfiles = () => {
 };
 
 export default UserProfiles;
-
-// return (
-//   <div className={props.className}>
-//     <img src="../images/trophy.png" />
-//     <h5>{props.fishcount}</h5>
-//     <img src="../images/quest.png" />
-//     <h5>{props.questcount}</h5>
-//   </div>
-// );

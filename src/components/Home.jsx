@@ -62,7 +62,29 @@ const Home = () => {
               className="userPokedexCard"
               status={
                 userData.find((user) => user.fields.posts?.includes(post.id))
-                  ?.fields.anglerstatus
+                  ?.fields.posts?.length > 1 &&
+                userData.find((user) => user.fields.posts?.includes(post.id))
+                  ?.fields.posts?.length <= 20
+                  ? "Amateur"
+                  : userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length > 20 &&
+                    userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length <= 50
+                  ? "Adept"
+                  : userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length > 50 &&
+                    userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length <= 100
+                  ? "Master"
+                  : userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length > 100
+                  ? "Master"
+                  : "Beginner"
               }
               fishtype={post.fields.fishtype}
               username={

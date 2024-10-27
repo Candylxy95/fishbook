@@ -7,7 +7,6 @@ import Stats from "./Stats";
 const UserPokedex = () => {
   const [userAcc, setUserAcc] = useState([]);
   const [postData, setPostData] = useState([]);
-  const [showPokedexCard, setShowPokedexCard] = useState(false);
   const { id } = useParams();
 
   const getUserData = async () => {
@@ -62,9 +61,22 @@ const UserPokedex = () => {
     return (
       <>
         <div className="userProfileCards" key={idx}>
+          <h1>{user.fields.username}'s Fishdex</h1>
           <UserCard
             className="userProfileCard"
-            status={user.fields.anglerstatus}
+            status={
+              user.fields.posts?.length > 10 && user.fields.posts?.length <= 20
+                ? "Amateur"
+                : user.fields.posts?.length > 20 &&
+                  user.fields.posts?.length <= 50
+                ? "Adept"
+                : user.fields.posts?.length > 50 &&
+                  user.fields.posts?.length <= 100
+                ? "Master"
+                : user.fields.posts?.length > 100
+                ? "Master"
+                : "Beginner"
+            }
             src={user.fields.img}
             userName={user.fields.username}
             age={user.fields.age}
@@ -73,8 +85,10 @@ const UserPokedex = () => {
           />
           <Stats
             className="stats"
-            fishcount={user.fields.posts.length}
-            questcount={user.fields.questcount}
+            fishcount={user.fields.posts ? user.fields.posts.length : 0}
+            questcount={
+              user.fields.questlist ? user.fields.questlist?.length : 0
+            }
           />
           {userPost && (
             <UserPokedexCard
