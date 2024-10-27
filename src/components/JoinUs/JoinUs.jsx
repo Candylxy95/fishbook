@@ -35,6 +35,9 @@ const JoinUs = () => {
               country: newUserInput.country,
               msg: newUserInput.msg,
               img: newUserInput.img,
+              fishcount: 0,
+              questcount: 0,
+              anglerstatus: "Beginner",
             },
           }),
         }

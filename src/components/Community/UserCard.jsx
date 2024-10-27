@@ -3,8 +3,10 @@ import Button from "../Button";
 
 const UserCard = (props) => {
   return (
-    <div className={props.className}>
-      <h5 style={props.style}>{props.status}</h5>
+    <div className={props.className} onClick={props.func}>
+      <div>
+        <h5>{props.status}</h5>
+      </div>
       <div className="userCardImg">
         <img src={props.src} />
       </div>
@@ -15,7 +17,6 @@ const UserCard = (props) => {
         <p>{props.location}</p>
         <p>{props.msg}</p>
       </div>
-      <Button func={props.func}>Check Out</Button>
     </div>
   );
 };

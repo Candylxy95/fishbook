@@ -27,7 +27,7 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
-          <img src="./images/fishbook-logo.png" style={{ width: "25%" }} />
+          <img src="../images/fishbook-logo.png" style={{ width: "25%" }} />
           <h1>FISHBOOK</h1>
         </li>
         <li>

@@ -7,6 +7,7 @@ const FishFinderPage = () => {
   const [fishesData, setFishesData] = useState([]);
   const [displayFishCards, setDisplayFishCards] = useState([]);
   const [showFishCard, setShowFishCard] = useState(true);
+  const [btnClicked, setBtnClicked] = useState(false);
   const fishDataRef = useRef();
 
   const getFishesData = async () => {
@@ -34,10 +35,6 @@ const FishFinderPage = () => {
     }
   };
 
-  useEffect(() => {
-    getFishesData();
-  }, []);
-
   const randomIdx = Math.floor(Math.random() * fishesData.length);
   const randomFishQuest = fishesData[randomIdx];
 
@@ -50,6 +47,14 @@ const FishFinderPage = () => {
     setShowFishCard(false);
     fishDataRef.current.value = "";
   };
+
+  const handleBtnClick = () => {
+    setBtnClicked(true);
+  };
+
+  useEffect(() => {
+    getFishesData();
+  }, []);
 
   return (
     <>
@@ -107,7 +112,7 @@ const FishFinderPage = () => {
                     fontSize: "20px",
                   }}
                 >
-                  uncommon
+                  Uncommon
                 </span>
               ) : randomFishQuest?.meta.conservation_status.includes(
                   "Vulnerable"
@@ -158,6 +163,8 @@ const FishFinderPage = () => {
               )
             }
             msg="Quest of the Moment"
+            func={handleBtnClick}
+            children={btnClicked ? "Added" : "Quest On"}
           />
         ) : (
           <FishFinderList displayFishCards={displayFishCards} />

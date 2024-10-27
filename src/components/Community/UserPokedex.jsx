@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import UserCard from "./UserCard";
 import UserPokedexCard from "./UserPokedexCard";
 import { useParams } from "react-router-dom";
+import Stats from "./Stats";
 
 const UserPokedex = () => {
   const [userAcc, setUserAcc] = useState([]);
@@ -69,6 +70,11 @@ const UserPokedex = () => {
             age={user.fields.age}
             location={user.fields.country}
             msg={user.fields.msg}
+          />
+          <Stats
+            className="stats"
+            fishcount={user.fields.posts.length}
+            questcount={user.fields.questcount}
           />
           {userPost && (
             <UserPokedexCard

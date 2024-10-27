@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import FishCard from "./FishCard";
 
 const FishFinderList = (props) => {
+  const [btnClicked, setBtnClicked] = useState(false);
+
+  const handleBtnClick = () => {
+    btnClicked ? setBtnClicked(false) : setBtnClicked(true);
+  };
+
   return (
     <div className="fishCardsDisplay">
       {Array.isArray(props.displayFishCards) &&
@@ -101,6 +107,8 @@ const FishFinderList = (props) => {
                   </span>
                 )
               }
+              children={btnClicked ? "Added" : "Quest On"}
+              func={handleBtnClick}
             />
           );
         })

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserPokedexCard from "./Community/UserPokedexCard";
+import Stats from "./Community/Stats";
 
 const Home = () => {
   const [postData, setPostData] = useState([]);
@@ -77,6 +78,17 @@ const Home = () => {
               msg={post.fields.msg}
               src={post.fields.img}
               date={post.fields.date}
+            />
+            <Stats
+              className="AnglerComStats"
+              fishcount={
+                userData.find((user) => user.fields.posts?.includes(post.id))
+                  ?.fields.posts.length
+              }
+              questcount={
+                userData.find((user) => user.fields.posts?.includes(post.id))
+                  ?.fields.questcount
+              }
             />
           </div>
         );
