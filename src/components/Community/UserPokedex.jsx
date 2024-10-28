@@ -82,9 +82,11 @@ const UserPokedex = () => {
       post.fields["Table 1"]?.includes(user.id)
     );
 
-    const userQuests = questData.find((quest) =>
-      quest.fields["Table 1"]?.includes(user.id)
+    const userQuests = questData?.filter(
+      (quest) => quest.fields["Table 1"]?.includes(user.id) //return all keyvaluepairs that includes user id in an array.
     );
+
+    console.log(userQuests);
 
     return (
       <>
@@ -118,10 +120,11 @@ const UserPokedex = () => {
               user.fields.questlist ? user.fields.questlist?.length : 0
             }
           />
-          <QuestList
-            className="stats"
-            fishtype={userQuests?.fields.fishquest}
-          />
+
+          <QuestList questArray={userQuests} />
+
+          <h5>Catch Data</h5>
+
           {userPost && (
             <UserPokedexCard
               className="userPokedexCard"
@@ -141,31 +144,3 @@ const UserPokedex = () => {
 };
 
 export default UserPokedex;
-
-// status={
-//     userData.find((user) => user.fields.posts?.includes(post.id))
-//       ?.fields.anglerstatus
-//   }
-
-// return (
-//     <div className={props.className}>
-//       <h5 style={props.style}>{props.status}</h5>
-//       <div>
-//         <img src={props.src} />
-//       </div>
-//       <div>
-//         <span>
-//           Caught: <h5>{props.fishtype}</h5>
-//         </span>
-//       </div>
-//       <div>
-//         <p>Fight: {props.fightrate}</p>
-//         <p>Location: {props.location}</p>
-//       </div>
-//       <p>{props.msg}</p>
-//       <div>
-//         <p>{props.date}</p>
-//         <p>{props.username}</p>
-//       </div>
-//     </div>
-//   );

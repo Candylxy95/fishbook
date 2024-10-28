@@ -1,0 +1,44 @@
+.questCard {
+  background-color: var(--white);
+  text-align: center;
+  padding: 15px 0;
+}
+
+.questCard > h5 {
+  font-family: var(--stac);
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.questList {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 10px;
+}
+
+.questList > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn,
+.updateBtn {
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  border-style: none;
+  transition: color 0.4s ease, background 0.4s ease-in-out;
+}
+
+.updateBtn {
+  width: 80%;
+  margin: 10px 0;
+}
+
+.btn:hover,
+.updateBtn:hover {
+  background-color: orangered;
+}

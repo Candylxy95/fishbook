@@ -4,7 +4,9 @@
   --black: #252525;
   --offwhite: #fbfefb;
   --white: rgb(249, 248, 245);
-  --nude: #efe5dc;
+  --nude: #efe5dcbe;
+  --arch: "Archivo Black", serif;
+  --stac: "Staatliches", sans-serif;
 }
 
 * {
@@ -185,11 +187,14 @@ h1 {
 
 .userCards {
   margin-top: 50px;
-  padding: 0 30px;
+  padding: 20px 300px;
   display: grid;
-  grid-template-columns: repeat(5, 25%);
+  grid-template-columns: repeat(5, 20%);
   column-gap: 30px;
   row-gap: 30px;
+  background-image: url(/images/oceanwaters.png);
+  background-size: cover;
+  height: 100vh;
 }
 
 .userCard {
@@ -260,13 +265,17 @@ display: grid;
 grid-template-columns: 30% 70%;
 align-items: center;
 */
+
+.pokecardstatus {
+  background-color: var(--nude);
+  color: white;
+  border-radius: 10px 10px 0 0;
+}
+
 .userPokedexCard {
-  margin-top: 15px;
-  padding: 15px;
   background-color: var(--nude);
   display: grid;
   grid-template-rows: 15% 35% 15% 10% 20% 15%;
-  border-radius: 10px 10px 0 0;
   height: 550px;
 }
 
@@ -282,7 +291,7 @@ align-items: center;
   justify-content: space-between;
 }
 
-.userPokedexCard > :nth-child(2) {
+.userPokedexCard > :first-child {
   text-align: center;
 }
 
@@ -290,6 +299,11 @@ align-items: center;
   width: 50%;
   justify-self: center;
   margin-top: 50px;
+}
+.userProfileCards > h1 {
+  font-family: var(--stac);
+  letter-spacing: 5px;
+  font-size: 40px;
 }
 
 .userProfileCard {
