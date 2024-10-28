@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import UserCard from "./UserCard";
 import UserPokedexCard from "./UserPokedexCard";
-import { useParams } from "react-router-dom";
 import Stats from "./Stats";
 import QuestList from "./QuestList";
+import styles from "./UserPokedex.module.css";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const UserPokedex = () => {
+  const navigate = useNavigate();
   const [userAcc, setUserAcc] = useState([]);
   const [postData, setPostData] = useState([]);
   const [questData, setQuestData] = useState([]);
   const { id } = useParams();
+  const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
 
   const getUserData = async () => {
     try {
@@ -83,9 +89,14 @@ const UserPokedex = () => {
         throw new Error("getting data error");
       }
       getQuestData();
+      getUserData();
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const handleCompleteClick = (fishType) => {
+    navigate("/createpost", { state: { defaultValue: fishType } });
   };
 
   useEffect(() => {
@@ -95,7 +106,7 @@ const UserPokedex = () => {
   }, []);
 
   return userAcc.map((user, idx) => {
-    const userPost = postData.find((post) =>
+    const userPost = postData?.filter((post) =>
       post.fields["Table 1"]?.includes(user.id)
     );
 
@@ -103,33 +114,77 @@ const UserPokedex = () => {
       (quest) => quest.fields["Table 1"]?.includes(user.id) //return all keyvaluepairs that includes user id in an array.
     );
 
-    console.log(userQuests);
+    const getPublicId = (url) => {
+      const cleanedUrl = url.split("?")[0];
+      const parts = cleanedUrl.split("/upload/");
+      if (parts[1]) {
+        return parts[1].split(/[/?]/).pop();
+      }
+    };
+
+    const publicId = getPublicId(user.fields.img);
+    console.log(`its this ${user.fields.img}`);
+    console.log(publicId);
+    const transformedDPurl = publicId
+      ? cld
+          .image(publicId)
+          .resize(fill().width(200).height(200).gravity("face"))
+          .toURL()
+      : "./images/fishbook-logo.png";
+
+    console.log(transformedDPurl);
 
     return (
       <>
-        <div className="userProfileCards" key={idx}>
+        <div className={styles.userProfileCards} key={idx}>
           <h1>{user.fields.username}'s FishDex</h1>
-          <UserCard
-            className="userProfileCard"
-            status={
-              user.fields.posts?.length > 10 && user.fields.posts?.length <= 20
-                ? "Amateur"
-                : user.fields.posts?.length > 20 &&
-                  user.fields.posts?.length <= 50
-                ? "Adept"
-                : user.fields.posts?.length > 50 &&
-                  user.fields.posts?.length <= 100
-                ? "Master"
-                : user.fields.posts?.length > 100
-                ? "Master"
-                : "Beginner"
-            }
-            src={user.fields.img}
-            userName={user.fields.username}
-            age={user.fields.age}
-            location={user.fields.country}
-            msg={user.fields.msg}
-          />
+          <div className={styles.fishDexBody}>
+            <div>
+              <UserCard
+                className={styles.userProfileCard}
+                userCardImg={styles.userCardImg}
+                userStatus={
+                  user.fields.posts?.length > 10 &&
+                  user.fields.posts?.length <= 20
+                    ? "Amateur"
+                    : user.fields.posts?.length > 20 &&
+                      user.fields.posts?.length <= 50
+                    ? "Adept"
+                    : user.fields.posts?.length > 50 &&
+                      user.fields.posts?.length <= 100
+                    ? "Master"
+                    : user.fields.posts?.length > 100
+                    ? "Master"
+                    : "Beginner"
+                }
+                // src={user.fields.img}
+                src={transformedDPurl}
+                actualImg={styles.actualImg}
+                userName={user.fields.username}
+                age={user.fields.age}
+                location={user.fields.country}
+                msg={user.fields.msg}
+              />
+            </div>
+            <div>
+              {userPost && (
+                <UserPokedexCard
+                  userPostArray={userPost}
+                  pokedexCardContainer={styles.pokedexCardContainer}
+                  className={styles.userPokedexCard}
+                  imgClassName={styles.imgClassName}
+                  // src={userPost?.fields?.img}
+                  // src={transformedPostImage}
+                  // fishtype={userPost?.fields?.fishtype}
+                  // fightrate={userPost?.fields?.fightrate}
+                  // location={userPost?.fields?.location}
+                  // msg={userPost?.fields?.msg}
+                  // date={userPost?.fields?.date}
+                  // fishstatus={userPost?.fields?.status}
+                />
+              )}
+            </div>
+          </div>
           <Stats
             className="stats"
             fishcount={user.fields.posts ? user.fields.posts.length : 0}
@@ -138,22 +193,11 @@ const UserPokedex = () => {
             }
           />
 
-          <QuestList questArray={userQuests} deleteFunc={delQuestData} />
-
-          <h5>Catch Data</h5>
-
-          {userPost && (
-            <UserPokedexCard
-              className="userPokedexCard"
-              src={userPost.fields.img}
-              fishtype={userPost.fields.fishtype}
-              fightrate={userPost.fields.fightrate}
-              location={userPost.fields.location}
-              msg={userPost.fields.msg}
-              date={userPost.fields.date}
-              fishstatus={userPost.fields.status}
-            />
-          )}
+          <QuestList
+            questArray={userQuests}
+            deleteFunc={delQuestData}
+            completeFunc={handleCompleteClick}
+          />
         </div>
       </>
     );

@@ -1,0 +1,80 @@
+.pokedexCardContainer {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70vh;
+  overflow-x: scroll;
+  border-radius: 0 10px 0 0;
+}
+
+.imgClassName {
+  border: solid 1px black;
+  width: 100%;
+  aspect-ratio: 4/5;
+}
+
+.actualImg {
+  border-radius: 100%;
+}
+
+.userPokedexCard {
+  padding: 20px;
+}
+
+.userPokedexCard > :nth-child(4) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userPokedexCard > :nth-child(6) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userPokedexCard > :first-child {
+  text-align: center;
+}
+
+.fishDexBody {
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+
+.userProfileCards {
+  width: 50%;
+  justify-self: center;
+  margin-top: 50px;
+  padding: 10px;
+}
+.userProfileCards > h1 {
+  font-family: var(--stac);
+  letter-spacing: 5px;
+  font-size: 40px;
+}
+
+.userProfileCard {
+  padding: 10px;
+  background-color: var(--nude);
+  /* display: grid;
+  grid-template-rows: 15% 35% 40% 10%; */
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px 0 0 0;
+  height: 100%;
+}
+
+.userCardImg {
+  border-radius: 100%;
+  border: solid 5px white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}

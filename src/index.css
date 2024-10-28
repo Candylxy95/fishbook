@@ -173,7 +173,7 @@ h1 {
   justify-content: space-around;
 }
 
-.profileHeader {
+/* .profileHeader {
   margin-top: 50px;
   width: 350px;
   text-align: center;
@@ -210,9 +210,9 @@ h1 {
 
 .userCardImg {
   text-align: center;
-}
+} */
 
-.userCardBtn {
+/* .userCardBtn {
   z-index: 1;
   position: absolute;
   border-style: none;
@@ -223,7 +223,7 @@ h1 {
   font-family: "Staatliches", serif;
   letter-spacing: 3px;
   background-color: var(--black);
-}
+} */
 
 .createPostDisplay {
   position: fixed;
@@ -327,7 +327,7 @@ align-items: center;
   border-radius: 0 0 10px 10px;
 }
 
-.AnglerComStats {
+/* .AnglerComStats {
   display: flex;
   background-color: white;
   flex-direction: row;
@@ -336,7 +336,7 @@ align-items: center;
   height: 60px;
   align-items: center;
   border-radius: 0 0 10px 10px;
-}
+} */
 
 .quest-modal-backdrop {
   position: fixed;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 import { useNavigate } from "react-router-dom";
 import Stats from "./Stats";
+import styles from "./UserProfiles.module.css";
 
 const UserProfiles = () => {
   const navigate = useNavigate();
@@ -38,16 +39,32 @@ const UserProfiles = () => {
 
   return (
     <>
-      <div className="profileHeader">
+      <div className={styles.profileHeader}>
         <h1>Connect with passionate Anglers today</h1>
       </div>
-      <div className="userCards">
+      <div className={styles.userCards}>
         {userInputs.map((userInput, idx) => {
           return (
             <div key={idx}>
+              <Stats
+                statsDivWrapper={styles.statsDivWrapper}
+                className={styles.anglerComStats}
+                fishcount={
+                  userInput.fields.posts ? userInput.fields.posts.length : 0
+                }
+                questcount={
+                  userInput.fields.questlist
+                    ? userInput.fields.questlist?.length
+                    : 0
+                }
+                width="20px"
+                height="20px"
+              />
+
               <UserCard
                 func={() => handleClick(userInput.id)}
-                className="userCard"
+                userCardImg={styles.userCardImg}
+                className={styles.userCard}
                 status={
                   userInput.fields.posts?.length > 10 &&
                   userInput.fields.posts?.length <= 20
@@ -67,17 +84,7 @@ const UserProfiles = () => {
                 age={userInput.fields.age}
                 location={userInput.fields.country}
                 msg={userInput.fields.msg}
-              />
-              <Stats
-                className="AnglerComStats"
-                fishcount={
-                  userInput.fields.posts ? userInput.fields.posts.length : 0
-                }
-                questcount={
-                  userInput.fields.questlist
-                    ? userInput.fields.questlist?.length
-                    : 0
-                }
+                userStatusClass={styles.userStatusClass}
               />
             </div>
           );

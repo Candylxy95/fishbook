@@ -5,11 +5,12 @@ const UserCard = (props) => {
   return (
     <div className={props.className} onClick={props.func}>
       <div>
-        <h5>{props.status}</h5>
+        <h6>{props.status}</h6>
       </div>
-      <div className="userCardImg">
-        <img src={props.src} />
+      <div className={props.userCardImg}>
+        <img src={props.src} className={props.actualImg} />
       </div>
+      <h5 className={props.userStatusClass}>{props.userStatus}</h5>
       <div>
         <h5>
           {props.userName}, {props.age}

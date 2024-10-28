@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styles from "./JoinUs.module.css";
 import Button from "../Button";
+import UploadImage from "../UploadImage";
 
 const JoinUs = () => {
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ const JoinUs = () => {
     ) {
       setValidation("Unavailable");
     } else setValidation("Available");
+  };
+
+  const handleImgChange = (url) => {
+    setNewUserInput((prevUserInput) => ({ ...prevUserInput, img: url }));
   };
 
   const getUserData = async () => {
@@ -105,6 +110,11 @@ const JoinUs = () => {
       <div className={styles.formContainer}>
         <div className={styles.uploadPhoto}>
           <h1>UPLOAD PHOTO HERE</h1>
+          <UploadImage
+            photoContainer={styles.photoContainer}
+            func={handleImgChange}
+            msg="Upload your profile photo"
+          />
         </div>
         <div className={styles.forms}>
           <label htmlFor="username">Username: </label>
