@@ -25,7 +25,10 @@ const QuestList = (props) => {
                   <p>{quest.fields.fishquest}</p>
                   {showBtn && (
                     <div>
-                      <button className={styles.btn} onClick={props.deleteFunc}>
+                      <button
+                        className={styles.btn}
+                        onClick={() => props.deleteFunc(quest.id)}
+                      >
                         X
                       </button>
                       <button

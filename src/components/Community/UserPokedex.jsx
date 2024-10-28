@@ -71,6 +71,23 @@ const UserPokedex = () => {
     }
   };
 
+  const delQuestData = async (questId) => {
+    try {
+      const res = await fetch(import.meta.env.VITE_USERQUESTS + "/" + questId, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_USERAPI_KEY}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("getting data error");
+      }
+      getQuestData();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   useEffect(() => {
     getUserData();
     getPostData();
@@ -121,7 +138,7 @@ const UserPokedex = () => {
             }
           />
 
-          <QuestList questArray={userQuests} />
+          <QuestList questArray={userQuests} deleteFunc={delQuestData} />
 
           <h5>Catch Data</h5>
 
