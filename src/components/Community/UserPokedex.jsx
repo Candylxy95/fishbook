@@ -133,6 +133,7 @@ const UserPokedex = () => {
         throw new Error("getting data error");
       }
       getUserData();
+      
     } catch (error) {
       console.error(error.message);
     }
@@ -144,7 +145,7 @@ const UserPokedex = () => {
     } else setUpdateBtnClicked(false);
   };
 
-  const handleBioUpdate = (bioMsg) => {};
+
 
   const handleCompleteClick = (fishType) => {
     navigate("/createpost", { state: { defaultValue: fishType } });

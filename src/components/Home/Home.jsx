@@ -150,20 +150,7 @@ const Home = () => {
               height="16px"
               fontSize="16px"
             />
-            {/* <Stats
-              statsDivWrapper={styles.statsDivWrapper}
-              className={styles.homeStats}
-              fishcount={
-                userData.find((user) => user.fields.posts?.includes(post.id))
-                  ?.fields.posts.length || 0
-              }
-              questcount={
-                userData.find((user) => user.fields.posts?.includes(post.id))
-                  ?.fields.questlist?.length || 0
-              }
-              width="20px"
-              height="20px"
-            /> */}
+         
           </div>
         );
       })}
@@ -173,25 +160,3 @@ const Home = () => {
 
 export default Home;
 
-{
-  /* <div className={props.className}>
-<h5 style={props.style}>{props.status}</h5>
-<div>
-  <img src={props.src} />
-</div>
-<div>
-  <p>Caught:</p>
-  <h5>{props.fishtype}</h5>
-  <p>
-    {props.fightrate} <span>{props.location}</span>
-  </p>
-  <p>{props.msg}</p>
-</div>
-<Button func={props.func}>Profile</Button>
-<p>
-  {props.username}, {props.age}
-</p>
-</div>
-);
-}; */
-}

@@ -1,13 +1,16 @@
 import React from "react";
 import styles from "./NavBar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   return (
     <div className={styles.navBarContainer}>
       <ul className={styles.ul}>
         <li>
-          <img src="../images/fishbook-logo.png" style={{ width: "45%" }} />
+          <Link to="/">
+            <img src="../images/fishbook-logo.png" style={{ width: "45%" }} />
+          </Link>
         </li>
         <li>
           <NavLink
@@ -27,13 +30,8 @@ const NavBar = () => {
             Fish Finder
           </NavLink>
         </li>
-        <div className={styles.searchGo}>
-          <input
-            className={styles.searchBar}
-            placeholder="   Search FishBook..."
-          ></input>
-          <button className={styles.navSearchBtn}>&#8594;</button>
-        </div>
+
+        <SearchBar />
         <li>
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}

@@ -8,6 +8,7 @@ import CreatePostModal from "./components/CreatePostModal";
 import UserPokedex from "./components/Community/UserPokedex";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/userpokedex/:id" element={<UserPokedex />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
+        <Route path="/searchpage" element={<SearchPage />} />
       </Routes>
     </div>
   );
