@@ -15,6 +15,7 @@ const UserPokedex = () => {
   const [userAcc, setUserAcc] = useState([]);
   const [postData, setPostData] = useState([]);
   const [questData, setQuestData] = useState([]);
+  const [updateBtnClicked, setUpdateBtnClicked] = useState(false);
   const { id } = useParams();
   const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
 
@@ -52,6 +53,23 @@ const UserPokedex = () => {
       }
       const data = await res.json();
       setPostData(data.records);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const delPostData = async (postId) => {
+    try {
+      const res = await fetch(import.meta.env.VITE_USERPOSTS + "/" + postId, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_USERAPI_KEY}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("getting data error");
+      }
+      getPostData();
     } catch (error) {
       console.error(error.message);
     }
@@ -97,6 +115,37 @@ const UserPokedex = () => {
     }
   };
 
+  const updateUserData = async (bioMsg) => {
+    try {
+      const res = await fetch(import.meta.env.VITE_USERSERVER + "/" + id, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_USERAPI_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fields: {
+            msg: bioMsg,
+          },
+        }),
+      });
+      if (!res.ok) {
+        throw new Error("getting data error");
+      }
+      getUserData();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleUpdateBtn = () => {
+    if (!updateBtnClicked) {
+      setUpdateBtnClicked(true);
+    } else setUpdateBtnClicked(false);
+  };
+
+  const handleBioUpdate = (bioMsg) => {};
+
   const handleCompleteClick = (fishType) => {
     navigate("/createpost", { state: { defaultValue: fishType } });
   };
@@ -139,15 +188,20 @@ const UserPokedex = () => {
     return (
       <>
         <div className={styles.userProfileCards} key={idx}>
-          <TypographyHeader
-            headerMsg={`${user.fields.username}'s FishDex`}
-            fontstyle={{
-              fontFamily: "var(--staac)",
-              letterSpacing: "2px",
-              fontSize: "40px",
-              fontWeight: "500",
-            }}
-          />
+          <div className={styles.headerDiv}>
+            <TypographyHeader
+              headerMsg={`${user.fields.username}'s FishDex`}
+              fontstyle={{
+                fontFamily: "var(--staac)",
+                letterSpacing: "2px",
+                fontSize: "40px",
+                fontWeight: "500",
+              }}
+            />
+            <button className={styles.updateBtn} onClick={handleUpdateBtn}>
+              Update
+            </button>
+          </div>
           <div className={styles.fishDexBody}>
             <div>
               <UserCard
@@ -167,13 +221,15 @@ const UserPokedex = () => {
                     ? "Master"
                     : "Beginner"
                 }
-                // src={user.fields.img}
+                userStatusClass={styles.userStatusClass}
                 src={transformedDPurl}
                 actualImg={styles.actualImg}
                 userName={user.fields.username}
                 age={user.fields.age}
                 location={user.fields.country}
                 msg={user.fields.msg}
+                setUpdateBtnClicked={updateBtnClicked}
+                handleBioUpdate={updateUserData}
               />
             </div>
             <div>
@@ -183,14 +239,8 @@ const UserPokedex = () => {
                   pokedexCardContainer={styles.pokedexCardContainer}
                   className={styles.userPokedexCard}
                   imgClassName={styles.imgClassName}
-                  // src={userPost?.fields?.img}
-                  // src={transformedPostImage}
-                  // fishtype={userPost?.fields?.fishtype}
-                  // fightrate={userPost?.fields?.fightrate}
-                  // location={userPost?.fields?.location}
-                  // msg={userPost?.fields?.msg}
-                  // date={userPost?.fields?.date}
-                  // fishstatus={userPost?.fields?.status}
+                  setUpdateBtnClicked={updateBtnClicked}
+                  delPostData={delPostData}
                 />
               )}
             </div>

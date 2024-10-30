@@ -6,6 +6,7 @@
   height: 70vh;
   overflow-x: scroll;
   border-radius: 0 10px 0 0;
+  justify-content: center;
 }
 
 .imgClassName {
@@ -50,17 +51,10 @@
   margin-top: 50px;
   padding: 10px;
 }
-/* .userProfileCards > h1 {
-  font-family: var(--stac);
-  letter-spacing: 5px;
-  font-size: 40px;
-} */
 
 .userProfileCard {
   padding: 10px;
   background-color: var(--nude);
-  /* display: grid;
-  grid-template-rows: 15% 35% 40% 10%; */
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -78,4 +72,47 @@
   text-align: center;
   width: 100%;
   aspect-ratio: 1 / 1;
+}
+
+.userStatusClass {
+  margin-top: -15px;
+}
+
+.userProfileCard > :nth-child(4) {
+  margin-top: -90px;
+}
+
+.updateBtn {
+  border-style: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  color: var(--offwhite);
+  font-family: "Staatliches", serif;
+  letter-spacing: 3px;
+  background-color: var(--black);
+  display: fixed;
+  transition: background 1s ease;
+}
+
+.updateBtn:hover {
+  background-color: orangered;
+}
+
+.headerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dateAndBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.msgStyle {
+  display: flex;
+  width: 100%;
+  height: auto;
 }

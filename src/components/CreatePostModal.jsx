@@ -4,10 +4,10 @@ import UploadImage from "./UploadImage";
 
 const CreatePostModal = () => {
   const location = useLocation();
-  const defaultValue = location.state?.defaultValue || "Select a catch";
+  const defaultValue = location.state?.defaultValue || "";
   const navigate = useNavigate();
   const [newPost, setNewPost] = useState({
-    fishtype: "",
+    fishtype: defaultValue,
     location: "",
     date: "",
     status: "",
@@ -18,7 +18,7 @@ const CreatePostModal = () => {
   });
   const [usersData, setUsersData] = useState([]);
   const [fishesData, setFishesData] = useState([]);
-  const [validation, setValidation] = useState(false);
+  const [validation, setValidation] = useState("");
   const [nameInput, setNameInput] = useState("");
   const [fishStatus, setFishStatus] = useState("");
 
@@ -69,15 +69,6 @@ const CreatePostModal = () => {
   };
 
   const addPost = async () => {
-    if (
-      !newPost.fishtype ||
-      !newPost["Table 1"] ||
-      !newPost.date ||
-      !newPost.location
-    ) {
-      alert("Please fill in all fields.");
-      return;
-    }
     try {
       const res = await fetch(import.meta.env.VITE_USERPOSTS, {
         method: "POST",
@@ -162,14 +153,17 @@ const CreatePostModal = () => {
   const handleNameChange = (e) => {
     setNameInput(e.target.value);
     const user = usersData.find(
-      (user) => user.fields.username === e.target.value
+      (user) =>
+        user.fields.username.toLowerCase() === e.target.value.toLowerCase()
     );
     if (user) {
-      setValidation(true);
+      setValidation("Valid User");
       setNewPost((prevPost) => ({ ...prevPost, ["Table 1"]: user.id }));
     } else {
-      setValidation(false);
-      setNewPost((prevPost) => ({ ...prevPost, ["Table 1"]: "" }));
+      setValidation(e.target.value === "" ? "" : "Invalid User");
+      if (e.target.value !== "") {
+        setNewPost((prevPost) => ({ ...prevPost, ["Table 1"]: "" }));
+      }
     }
   };
 
@@ -177,10 +171,31 @@ const CreatePostModal = () => {
     navigate(-1);
   };
 
+  const handleCreateBtn = () => {
+    if (
+      !newPost.fishtype ||
+      !newPost["Table 1"] ||
+      !newPost.date ||
+      !newPost.location ||
+      validation !== "Valid User"
+    ) {
+      console.log(`FISH IS ${newPost.fishtype}`);
+      alert("Ensure all fields are filled with valid values.");
+      return;
+    }
+    addPost();
+  };
+
   useEffect(() => {
     getFishesData();
     getUsersData();
   }, []);
+
+  useEffect(() => {
+    if (fishesData.length > 0 && defaultValue) {
+      handleFishChange({ target: { name: "fishtype", value: defaultValue } });
+    }
+  }, [fishesData, defaultValue]);
 
   return (
     <div className="createPostDisplay">
@@ -202,10 +217,12 @@ const CreatePostModal = () => {
             onChange={handleNameChange}
           />
           <div>
-            {validation ? (
-              <p style={{ color: "green" }}>Valid User</p>
-            ) : (
+            {validation === "Valid User" ? (
+              <p style={{ color: "green" }}>{validation}</p>
+            ) : validation === "Invalid User" ? (
               <p style={{ color: "red" }}>Invalid User</p>
+            ) : (
+              <p></p>
             )}
           </div>
         </div>
@@ -215,9 +232,11 @@ const CreatePostModal = () => {
             name="fishtype"
             type="text"
             onChange={handleFishChange}
-            value={newPost.fishtype || defaultValue}
+            value={newPost.fishtype}
           >
-            <option value={defaultValue}>{defaultValue}</option>
+            <option value={defaultValue}>
+              {defaultValue || "Select a Catch"}
+            </option>
             {fishesData.map((fishData, idx) => {
               return (
                 <option key={idx} value={fishData.name}>
@@ -274,7 +293,7 @@ const CreatePostModal = () => {
             value={newPost.msg}
           />
           <div className="questModalBtnContainer">
-            <button className="questModalBtn" onClick={addPost}>
+            <button className="questModalBtn" onClick={handleCreateBtn}>
               Create Post!
             </button>
             <button className="questModalBtn" onClick={handleCancel}>

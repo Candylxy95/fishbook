@@ -166,6 +166,7 @@ h1 {
   font-family: "Staatliches", serif;
   letter-spacing: 3px;
   background-color: var(--black);
+  transition: background 1s ease;
 }
 
 .questOnBtn:hover,
@@ -390,6 +391,7 @@ align-items: center;
   font-family: "Staatliches", serif;
   letter-spacing: 3px;
   background-color: var(--black);
+  transition: background 1s ease;
 }
 
 .questModalBtnContainer {

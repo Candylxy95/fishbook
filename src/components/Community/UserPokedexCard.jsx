@@ -1,13 +1,14 @@
 import React from "react";
+import styles from "./UserPokedex.module.css";
 
 const UserPokedexCard = (props) => {
   return (
     <>
       <div className={props.pokedexCardContainer}>
         {props.userPostArray?.length > 0 ? (
-          props.userPostArray?.map((userpost, idx) => {
+          props.userPostArray?.map((userpost) => {
             return (
-              <div key={idx}>
+              <div key={userpost.id}>
                 <div>
                   <img
                     src={userpost.fields.img || "../images/fishbook-logo"}
@@ -21,7 +22,7 @@ const UserPokedexCard = (props) => {
                       <h5>
                         {userpost.fields.fishtype}{" "}
                         <p style={{ fontSize: "16px" }}>
-                          {userpost?.fields?.fishstatus}
+                          {userpost?.fields?.status}
                         </p>
                       </h5>
                     </span>
@@ -32,9 +33,20 @@ const UserPokedexCard = (props) => {
                   <p>Location: {userpost.fields.location}</p>
                 </div>
                 <p style={{ paddingLeft: "10px" }}>{userpost.fields.msg}</p>
-                <div>
+                <div
+                  className={styles.dateAndBtn}
+                  style={{ paddingRight: "10px" }}
+                >
                   <p style={{ paddingLeft: "10px" }}>{userpost.fields.date}</p>
                   <p>{userpost.fields.username}</p>
+                  {props.setUpdateBtnClicked && (
+                    <button
+                      className={styles.updateBtn}
+                      onClick={props.delPostData(userpost.id)}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
             );

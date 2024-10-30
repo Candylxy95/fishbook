@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 const QuestOverlay = (props) => {
   const [userData, setUserData] = useState([]);
   const [input, setInput] = useState("");
-  const [validation, setValidation] = useState(false);
+  const [validation, setValidation] = useState("");
   const [questList, setQuestList] = useState([]);
   const [questValid, setQuestValid] = useState(true);
 
@@ -81,17 +81,20 @@ const QuestOverlay = (props) => {
   const handleChange = (e) => {
     setInput(e.target.value);
     const user = userData.find(
-      (user) => user.fields.username === e.target.value
+      (user) =>
+        user.fields.username.toLowerCase() === e.target.value.toLowerCase()
     );
     if (user) {
-      setValidation(true);
+      setValidation("Valid User");
     } else {
-      setValidation(false);
+      setValidation(e.target.value === "" ? "" : "Invalid User");
     }
   };
 
   const handleClick = () => {
-    const user = userData.find((user) => user.fields.username === input);
+    const user = userData.find(
+      (user) => user.fields.username.toLowerCase() === input.toLowerCase()
+    );
 
     if (user) {
       const quest = questList.find(
@@ -126,10 +129,12 @@ const QuestOverlay = (props) => {
             onChange={handleChange}
           />
           <div>
-            {validation ? (
+            {validation === "Valid User" ? (
               <p style={{ color: "green" }}>Valid User</p>
-            ) : (
+            ) : validation === "Invalid User" ? (
               <p style={{ color: "red" }}>Invalid User</p>
+            ) : (
+              <p></p>
             )}
           </div>
         </div>

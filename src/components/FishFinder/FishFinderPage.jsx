@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import FishCard from "./FishCard";
 import FishFinderList from "./FishFinderList";
 import QuestModal from "../QuestModal";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const FishFinderPage = () => {
   const [showQuestModal, setShowQuestModal] = useState(false);
   const [selectedFish, setSelectedFish] = useState(""); //log fishtype name here
@@ -88,7 +88,8 @@ const FishFinderPage = () => {
           <FishCard
             className="fishCard"
             src={
-              randomFishQuest?.img_src_set["1.5x"] || "FIND ANOTHER FISH IMG"
+              randomFishQuest?.img_src_set["1.5x"] ||
+              "./images/fishimgplaceholder.png"
             }
             fishName={randomFishQuest?.name}
             rarity={

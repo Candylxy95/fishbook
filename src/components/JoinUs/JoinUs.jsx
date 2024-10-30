@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./JoinUs.module.css";
-import Button from "../Button";
 import UploadImage from "../UploadImage";
+import TypographyHeader from "../TypographyHeader";
 
 const JoinUs = () => {
   const navigate = useNavigate();
@@ -26,9 +26,11 @@ const JoinUs = () => {
     setNewUserInput((prevUserInput) => ({ ...prevUserInput, [name]: value }));
     if (value === "") {
       setValidation("");
+    } else if (value.includes(" ")) {
+      setValidation("Spaces");
     } else if (
       userData.find(
-        (user) => user.fields.username.toLowerCase() === value.toLowerCase() //REMOVE SPACES
+        (user) => user.fields.username.toLowerCase() === value.toLowerCase()
       )
     ) {
       setValidation("Unavailable");
@@ -98,15 +100,37 @@ const JoinUs = () => {
     }
   };
 
+  const addControlledUserInput = () => {
+    if (
+      validation === "Available" &&
+      newUserInput.username &&
+      newUserInput.country &&
+      newUserInput.msg &&
+      Number(newUserInput.age)
+    ) {
+      addUserInput();
+    } else
+      alert(
+        "Ensure all fields are filled with valid values, and age is a number"
+      );
+  };
+
   useEffect(() => {
     getUserData();
   }, []);
 
   return (
     <div className={styles.div}>
-      <h1 style={{ width: "350px", textAlign: "center" }}>
-        Join our community of Anglers today
-      </h1>
+      <TypographyHeader
+        headerMsg={"Join our community of Anglers today"}
+        speed={50}
+        fontstyle={{
+          fontFamily: "Helvetica Neue",
+          fontSize: "40px",
+          fontWeight: "500",
+          lineHeight: "40px",
+        }}
+      />
       <div className={styles.formContainer}>
         <div className={styles.uploadPhoto}>
           <h1>Upload profile photo</h1>
@@ -129,6 +153,8 @@ const JoinUs = () => {
             <p style={{ color: "green" }}>Available</p>
           ) : validation === "Unavailable" ? (
             <p style={{ color: "red" }}>Unavailable</p>
+          ) : validation === "Spaces" ? (
+            <p style={{ color: "red" }}>Spaces not allowed</p>
           ) : (
             <p></p>
           )}
@@ -163,18 +189,9 @@ const JoinUs = () => {
             onChange={handleChange}
           />
         </div>
-        <Button
-          func={() =>
-            newUserInput.username &&
-            newUserInput.country &&
-            newUserInput.msg &&
-            Number(newUserInput.age)
-              ? addUserInput()
-              : alert("Please fill in all fields and enter number for age")
-          }
-        >
+        <button className={styles.joinNowBtn} onClick={addControlledUserInput}>
           Join Now!
-        </Button>
+        </button>
       </div>
     </div>
   );

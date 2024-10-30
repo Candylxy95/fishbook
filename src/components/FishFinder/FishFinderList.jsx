@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import FishCard from "./FishCard";
 import QuestModal from "../QuestModal";
+import { useNavigate } from "react-router-dom";
 
 const FishFinderList = (props) => {
+  const navigate = useNavigate();
   const [showQuestModal, setShowQuestModal] = useState(false);
   const [selectedFish, setSelectedFish] = useState(""); //log fishtype name here
 
   const handleQuestClick = (fishType) => {
     setSelectedFish(fishType);
     setShowQuestModal(true);
+  };
+
+  const handleCompleteClick = (fishType) => {
+    setSelectedFish(fishType);
+    navigate("/createpost", { state: { defaultValue: fishType } });
   };
 
   return (
@@ -119,6 +126,7 @@ const FishFinderList = (props) => {
                   )
                 }
                 questClick={() => handleQuestClick(displayFishCard.name)}
+                completeClick={() => handleCompleteClick(displayFishCard.name)}
               />
             );
           })

@@ -24,7 +24,7 @@ const QuestList = (props) => {
               <div>
                 {props.questArray.map((quest) => {
                   return (
-                    <div className={styles.questList}>
+                    <div className={styles.questList} key={quest.id}>
                       <p>{quest.fields.fishquest}</p>
                       {showBtn && (
                         <div>

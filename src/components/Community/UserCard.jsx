@@ -1,6 +1,28 @@
 import React from "react";
+import styles from "./UserPokedex.module.css";
+import { useState } from "react";
 
 const UserCard = (props) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editBtnMsg, setEditBtnMsg] = useState("Edit");
+  const [newBio, setNewBio] = useState("");
+
+  const handleBioEdit = () => {
+    if (!isEditing) {
+      setIsEditing(true);
+      setEditBtnMsg("Submit");
+      setNewBio(props.msg);
+    } else {
+      props.handleBioUpdate(newBio);
+      setEditBtnMsg("Edit");
+      setIsEditing(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setNewBio(e.target.value);
+  };
+
   return (
     <div className={props.className} onClick={props.func}>
       <div>
@@ -32,7 +54,32 @@ const UserCard = (props) => {
           </h5>
           <p>{props.location}</p>
         </div>
-        <p className={props.msgstyle}>{props.msg}</p>
+        <div className={styles.msgStyle}>
+          {!isEditing ? (
+            <p>{props.msg}</p>
+          ) : (
+            <textarea
+              style={{
+                width: "100%",
+                height: "150px",
+                display: "flex",
+                textAlign: "left",
+                verticalAlign: "top",
+              }}
+              value={newBio}
+              onChange={handleChange}
+            ></textarea>
+          )}
+        </div>
+        {props.setUpdateBtnClicked && (
+          <button
+            className={styles.updateBtn}
+            style={{ marginTop: "15px" }}
+            onClick={handleBioEdit}
+          >
+            {editBtnMsg}
+          </button>
+        )}
       </div>
     </div>
   );
