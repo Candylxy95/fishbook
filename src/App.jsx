@@ -6,7 +6,8 @@ import JoinUs from "./components/JoinUs/JoinUs";
 import UserProfiles from "./components/Community/UserProfiles";
 import CreatePostModal from "./components/CreatePostModal";
 import UserPokedex from "./components/Community/UserPokedex";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/userprofiles" element={<UserProfiles />} />
         <Route path="/createpost" element={<CreatePostModal />} />
         <Route path="/userpokedex/:id" element={<UserPokedex />} />
-        <Route path="*" element={<h1>Sailed too far out, head back</h1>} />
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>

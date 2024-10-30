@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./NavBar.module.css";
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div>
-      <div className="mb-4"></div>
+    <div className={styles.navBarContainer}>
       <ul className={styles.ul}>
+        <li>
+          <img src="../images/fishbook-logo.png" style={{ width: "45%" }} />
+        </li>
         <li>
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}
@@ -26,21 +27,32 @@ const NavBar = () => {
             Fish Finder
           </NavLink>
         </li>
-        <li>
-          <img src="../images/fishbook-logo.png" style={{ width: "25%" }} />
-          <h1>FISHBOOK</h1>
-        </li>
+        <div className={styles.searchGo}>
+          <input
+            className={styles.searchBar}
+            placeholder="   Search FishBook..."
+          ></input>
+          <button className={styles.navSearchBtn}>&#8594;</button>
+        </div>
         <li>
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}
             to="/userprofiles"
           >
-            Angler Community
+            Community
           </NavLink>
         </li>
-        <li>
+        <li
+          style={{
+            backgroundColor: "orangered",
+            borderRadius: "20px",
+            height: "40px",
+            alignContent: "center",
+          }}
+        >
           <NavLink
             className={(navLink) => (navLink.isActive ? styles.active : "")}
+            style={{ color: "white" }}
             to="/createpost"
           >
             Create Post

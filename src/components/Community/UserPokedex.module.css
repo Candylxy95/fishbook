@@ -16,6 +16,7 @@
 
 .actualImg {
   border-radius: 100%;
+  width: 100%;
 }
 
 .userPokedexCard {
@@ -49,11 +50,11 @@
   margin-top: 50px;
   padding: 10px;
 }
-.userProfileCards > h1 {
+/* .userProfileCards > h1 {
   font-family: var(--stac);
   letter-spacing: 5px;
   font-size: 40px;
-}
+} */
 
 .userProfileCard {
   padding: 10px;

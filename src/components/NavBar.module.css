@@ -1,8 +1,6 @@
-:root {
-  --black: #252525;
-  --offwhite: #fbfefb;
-  --white: rgb(249, 248, 245);
-  --nude: #efe5dc;
+.navBarContainer {
+  background-color: var(--gray);
+  padding: 10px 10px 1px 10px;
 }
 
 ul {
@@ -23,17 +21,45 @@ li {
 a {
   text-decoration: none;
   color: var(--black);
-  padding: 10px;
   transition: color 0.4s ease, background 0.4s ease-in-out;
 }
 
 a:hover {
-  background-color: orangered;
   color: var(--offwhite);
   font-weight: 500;
-  border-radius: 10px;
+  border-radius: 20px;
+  height: 40px;
 }
 
 a:active {
   color: orangered;
+}
+
+.searchGo {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  height: 100%;
+  position: relative;
+}
+
+.navSearchBtn {
+  background-color: var(--black);
+  border-style: none;
+  border-radius: 0 20px 20px 0;
+  color: white;
+  position: absolute;
+  left: 95%;
+}
+
+.navSearchBtn:hover {
+  background-color: orangered;
+}
+
+.searchBar {
+  background-color: rgba(154, 171, 171, 0.406);
+  border-style: none;
+  border-radius: 20px 0 0 20px;
+  color: orangered;
+  width: 95%;
 }

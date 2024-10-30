@@ -30,7 +30,7 @@ const FishFinderList = (props) => {
                 className="fishCardDisplay"
                 src={
                   displayFishCard?.img_src_set["1.5x"] ||
-                  "FIND ANOTHER FISH IMG"
+                  "./images/fishimgplaceholder.png"
                 }
                 fishName={displayFishCard?.name}
                 rarity={

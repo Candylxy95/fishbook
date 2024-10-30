@@ -1,27 +1,16 @@
 import React from "react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { fill } from "@cloudinary/url-gen/actions/resize";
-import { face } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 const UserPokedexCard = (props) => {
-  const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
-
   return (
     <>
       <div className={props.pokedexCardContainer}>
         {props.userPostArray?.length > 0 ? (
           props.userPostArray?.map((userpost, idx) => {
-            // const transformedPostImage = userpost.fields.img
-            //   ? cld.image(userpost.fields.img).resize(fill().width(550)).toURL()
-            //   : "./images/fishbook-logo.png";
-
             return (
               <div key={idx}>
-                {/* <h5 style={props.style}>{props.status}</h5> */}
                 <div>
                   <img
                     src={userpost.fields.img || "../images/fishbook-logo"}
-                    // src={transformedPostImage || "../images/fishbook-logo"}
                     className={props.imgClassName}
                   />
                 </div>
@@ -38,22 +27,42 @@ const UserPokedexCard = (props) => {
                     </span>
                   </div>
                 </div>
-                <div>
+                <div style={{ paddingLeft: "10px" }}>
                   <p>Fight: {userpost.fields.fightrate}</p>
                   <p>Location: {userpost.fields.location}</p>
                 </div>
-                <p>{userpost.fields.msg}</p>
+                <p style={{ paddingLeft: "10px" }}>{userpost.fields.msg}</p>
                 <div>
-                  <p>{userpost.fields.date}</p>
+                  <p style={{ paddingLeft: "10px" }}>{userpost.fields.date}</p>
                   <p>{userpost.fields.username}</p>
                 </div>
               </div>
             );
           })
         ) : (
-          <h5 style={{ alignSelf: "center", marginTop: "80%" }}>
-            No posts to show
-          </h5>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                border: "solid 5px #252525",
+                padding: "20px 10px",
+                borderRadius: "100%",
+              }}
+            >
+              <img
+                src="../images/fishiconblack.png"
+                style={{ width: "100px", height: "auto" }}
+              />
+            </div>
+            <p>This user has no posts yet</p>
+          </div>
         )}
       </div>
     </>

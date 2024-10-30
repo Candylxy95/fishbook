@@ -1,22 +1,38 @@
 import React from "react";
-import Button from "../Button";
 
 const UserCard = (props) => {
   return (
     <div className={props.className} onClick={props.func}>
       <div>
-        <h6>{props.status}</h6>
+        <p>{props.status}</p>
       </div>
       <div className={props.userCardImg}>
         <img src={props.src} className={props.actualImg} />
       </div>
-      <h5 className={props.userStatusClass}>{props.userStatus}</h5>
+      <div className={props.statsClass}>
+        <p className={props.userStatusClass}>{props.userStatus}</p>
+        <div className={props.statsClassChild}>
+          <img
+            src={props.trophyimg}
+            style={{ width: props.width, height: props.height }}
+          />
+          <p style={{ fontSize: props.fontSize }}>{props.fishcount}</p>
+
+          <img
+            src={props.questimg}
+            style={{ width: props.width, height: props.height }}
+          />
+          <p style={{ fontSize: props.fontSize }}>{props.questcount}</p>
+        </div>
+      </div>
       <div>
-        <h5>
-          {props.userName}, {props.age}
-        </h5>
-        <p>{props.location}</p>
-        <p>{props.msg}</p>
+        <div className={props.userlocationDiv}>
+          <h5>
+            {props.userName}, {props.age}
+          </h5>
+          <p>{props.location}</p>
+        </div>
+        <p className={props.msgstyle}>{props.msg}</p>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import QuestList from "./QuestList";
 import styles from "./UserPokedex.module.css";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { fill } from "@cloudinary/url-gen/actions/resize";
+import TypographyHeader from "../TypographyHeader";
 
 const UserPokedex = () => {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const UserPokedex = () => {
       }
       const data = await res.json();
       setQuestData(data.records);
+      console.log(`quest data = ${questData}`);
     } catch (error) {
       console.error(error.message);
     }
@@ -137,7 +139,15 @@ const UserPokedex = () => {
     return (
       <>
         <div className={styles.userProfileCards} key={idx}>
-          <h1>{user.fields.username}'s FishDex</h1>
+          <TypographyHeader
+            headerMsg={`${user.fields.username}'s FishDex`}
+            fontstyle={{
+              fontFamily: "var(--staac)",
+              letterSpacing: "2px",
+              fontSize: "40px",
+              fontWeight: "500",
+            }}
+          />
           <div className={styles.fishDexBody}>
             <div>
               <UserCard

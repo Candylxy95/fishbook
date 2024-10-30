@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import UploadImage from "./UploadImage";
 
-const CreatePostModal = (props) => {
+const CreatePostModal = () => {
   const location = useLocation();
   const defaultValue = location.state?.defaultValue || "Select a catch";
   const navigate = useNavigate();
@@ -124,6 +124,10 @@ const CreatePostModal = (props) => {
     setNewPost((prevPost) => ({ ...prevPost, [name]: value }));
   };
 
+  const handleImgChange = (url) => {
+    setNewPost((prevPost) => ({ ...prevPost, img: url }));
+  };
+
   const handleFishChange = (e) => {
     const { name, value } = e.target;
     const fish = fishesData.find((fish) => fish.name === e.target.value);
@@ -180,13 +184,14 @@ const CreatePostModal = (props) => {
 
   return (
     <div className="createPostDisplay">
-      <h1 style={{ width: "350px", textAlign: "center" }}>
-        Share your awesome catch
-      </h1>
       <div className="createPostForm">
         <div className="createPostInput">
-          <label>Upload your catch: </label>
-          <input name="img" type="file" />
+          <h1 style={{ textAlign: "center" }}>Share your awesome catch</h1>
+          <UploadImage
+            photoContainer="photoContainer"
+            msg="Upload your catch"
+            func={handleImgChange}
+          />
         </div>
         <div className="createPostInput">
           <label>Username: </label>

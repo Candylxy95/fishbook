@@ -1,6 +1,4 @@
 import React from "react";
-import Input from "../Input";
-import Button from "../Button";
 
 const FishCard = (props) => {
   return (

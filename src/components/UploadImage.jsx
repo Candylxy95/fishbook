@@ -50,14 +50,39 @@ const UploadImage = (props) => {
 
   return (
     <>
-      {photoImage ? (
-        <AdvancedImage
-          cldImg={cld.image(photoImage).resize(fill().width(250))}
-          style={{ width: "100%", maxWidth: "250px", height: "auto" }}
-        />
-      ) : (
-        <img src="./images/fishbook-logo.png" />
-      )}
+      <div className="uploadPhoto">
+        {photoImage ? (
+          <AdvancedImage
+            cldImg={cld
+              .image(photoImage)
+              .resize(fill().width(250))
+              .format("auto")
+              .quality("auto")}
+            style={{
+              width: "100%",
+              height: "auto",
+              maxWidth: "200px",
+              maxHeight: "250px",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              border: "solid 5px black",
+              aspectRatio: "1/1",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "20px",
+            }}
+          >
+            <img
+              src="./images/uploadimage.png"
+              style={{ width: "50%", height: "50%" }}
+            />
+          </div>
+        )}
+      </div>
       <div className="createPostInput">
         <label>{props.msg}</label>
         <input

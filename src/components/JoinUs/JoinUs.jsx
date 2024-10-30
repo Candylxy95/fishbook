@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styles from "./JoinUs.module.css";
 import Button from "../Button";
@@ -109,7 +109,7 @@ const JoinUs = () => {
       </h1>
       <div className={styles.formContainer}>
         <div className={styles.uploadPhoto}>
-          <h1>UPLOAD PHOTO HERE</h1>
+          <h1>Upload profile photo</h1>
           <UploadImage
             photoContainer={styles.photoContainer}
             func={handleImgChange}
