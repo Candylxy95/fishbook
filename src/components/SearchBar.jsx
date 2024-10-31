@@ -22,7 +22,7 @@ const SearchBar = () => {
     <div className={styles.searchGo}>
       <input
         className={styles.searchBar}
-        placeholder="   Search Fishbook..."
+        placeholder="Search Fishbook..."
         onChange={handleChange}
         value={searchValue}
       ></input>

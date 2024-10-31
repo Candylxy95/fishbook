@@ -1,3 +1,15 @@
+@keyframes bounce {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+
 .searchPage {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -16,6 +28,10 @@
   gap: 15px;
 }
 
+.fishCardBtns {
+  display: none;
+}
+
 .pokeCardContainer {
   display: flex;
   flex-direction: column;
@@ -25,6 +41,10 @@
   justify-content: center;
   padding: 15px;
   border: 1px solid var(--nude);
+}
+
+.pokeCardContainer:hover {
+  animation: bounce 0.8s ease-in-out;
 }
 
 .fishRow {
@@ -85,6 +105,10 @@
   justify-content: center;
   padding: 15px;
   border: 1px solid var(--nude);
+}
+
+.userCardContainer:hover {
+  animation: bounce 0.8s ease-in-out;
 }
 
 .homeStats {

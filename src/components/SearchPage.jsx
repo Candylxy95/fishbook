@@ -5,8 +5,10 @@ import { useLocation } from "react-router-dom";
 import HomePokeCard from "./Home/HomePokeCard";
 import FishCard from "./FishFinder/FishCard";
 import LoadingSpinner from "./LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const defaultValue = location.state?.defaultValue;
   const [fishesData, setFishesData] = useState([]);
@@ -43,11 +45,6 @@ const SearchPage = () => {
         throw new Error("no fishy data for you");
       }
       const data = await res.json();
-
-      // const fishWithConservationStatus = data.filter(
-      //   (fishData) => fishData.meta && fishData.meta.conservation_status
-      // ); //grab only fishes with conservation status
-
       setFishesData(data);
       fishSearchOnMount();
     } catch (error) {
@@ -86,7 +83,6 @@ const SearchPage = () => {
       }
       const data = await res.json();
       setUserData(data.records);
-      console.log(userData);
       userSearchOnMount();
     } catch (error) {
       console.error(error.message);
@@ -130,6 +126,10 @@ const SearchPage = () => {
     }
   };
 
+  const handleClick = (userId) => {
+    navigate(`/UserPokedex/${userId}`);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -165,6 +165,7 @@ const SearchPage = () => {
           {displayPostCards.map((post) => {
             return (
               <HomePokeCard
+                func={() => handleClick(post.fields["Table 1"])}
                 key={post.id}
                 pokedexCardContainer={styles.pokeCardContainer}
                 className={styles.userPokeCard}
@@ -326,12 +327,12 @@ const SearchPage = () => {
                 <FishCard
                   key={displayFishCard.id}
                   className={styles.fishCard}
-                  fishBtns={styles.fishBtns}
                   imgClass={styles.fishImgClass}
                   src={
                     displayFishCard?.img_src_set["1.5x"] ||
                     "./images/fishimgplaceholder.png"
                   }
+                  fishCardBtns={styles.fishCardBtns}
                   fishName={displayFishCard?.name}
                   rarity={
                     displayFishCard?.meta.conservation_status?.includes(

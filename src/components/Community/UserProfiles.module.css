@@ -24,25 +24,15 @@
   }
 }
 
-.profileHeader {
-  margin-top: 50px;
-
-  display: flex;
-
-  flex-direction: column;
-  padding-left: 8%;
-}
-
 .userCards {
   margin-top: 50px;
   padding: 20px 300px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   column-gap: 30px;
   row-gap: 30px;
   justify-content: center;
-  /* background-image: url(/images/oceanwaters.png); */
   background-size: cover;
   height: 100vh;
   animation: fadeIn 1s ease-in forwards;
@@ -52,8 +42,10 @@
   display: flex;
   flex-direction: column;
   width: 250px;
-  border-radius: 20px 20px 0 0;
+  border-radius: 20px;
   height: auto;
+  padding: 15px;
+  border: 1px solid var(--nude);
 }
 
 .userCard:hover {
@@ -129,4 +121,14 @@
   flex-direction: row;
   column-gap: 5px;
   align-items: center;
+}
+
+.profileHeader {
+  width: 100%;
+  height: 170px;
+  display: fixed;
+  justify-content: center;
+  padding: 50px;
+  background-color: orangered;
+  background-position: contain;
 }

@@ -39,6 +39,7 @@ const FishFinderList = (props) => {
                   displayFishCard?.img_src_set["1.5x"] ||
                   "./images/fishimgplaceholder.png"
                 }
+                fishCardBtns="fishCardBtns"
                 fishName={displayFishCard?.name}
                 rarity={
                   displayFishCard?.meta.conservation_status?.includes(

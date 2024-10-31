@@ -1,18 +1,17 @@
 .pokedexCardContainer {
-  background-color: var(--white);
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 70vh;
-  overflow-x: scroll;
-  border-radius: 0 10px 0 0;
-  justify-content: center;
+  height: 100vh;
+  overflow-y: auto;
+  border-radius: 0 20px 0 0;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .imgClassName {
-  border: solid 1px black;
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .actualImg {
@@ -42,7 +41,7 @@
 
 .fishDexBody {
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 30% 70%;
 }
 
 .userProfileCards {
@@ -54,23 +53,25 @@
 
 .userProfileCard {
   padding: 10px;
-  background-color: var(--nude);
   display: flex;
   flex-direction: column;
   row-gap: 20px;
   align-items: center;
   width: 100%;
-  border-radius: 10px 0 0 0;
+  border-radius: 20px 0 0 0;
   height: 100%;
+  border: 1px solid var(--nude);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .userCardImg {
   border-radius: 100%;
-  border: solid 5px white;
+  border: solid 1px var(--nude);
   display: flex;
   justify-content: center;
   text-align: center;
   width: 100%;
+  padding: 5px;
   aspect-ratio: 1 / 1;
 }
 
@@ -84,15 +85,14 @@
 
 .updateBtn {
   border-style: none;
-  border-radius: 5px;
-  width: 100px;
-  height: 30px;
+  border-radius: 20px;
+  width: 120px;
+  height: 40px;
   color: var(--offwhite);
-  font-family: "Staatliches", serif;
-  letter-spacing: 3px;
+  font-family: var(--stac);
   background-color: var(--black);
-  display: fixed;
   transition: background 1s ease;
+  justify-self: center;
 }
 
 .updateBtn:hover {

@@ -44,9 +44,11 @@
   display: flex;
   flex-direction: column;
   width: 250px;
-  min-height: 100%;
+  height: auto;
   border-radius: 20px;
   justify-content: center;
+  border: 1px solid var(--nude);
+  padding: 15px;
 }
 
 .pokeCardContainer:hover {
@@ -66,8 +68,9 @@
 
 .statsDivWrapper {
   width: 250px;
-  height: 100%;
+  height: inherit;
   position: absolute;
+  padding: 25px;
 }
 
 .homeStats {

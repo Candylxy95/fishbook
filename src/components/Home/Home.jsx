@@ -5,8 +5,10 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import LoadingSpinner from "../LoadingSpinner";
 import TypographyHeader from "../TypographyHeader";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [postData, setPostData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,8 +29,11 @@ const Home = () => {
         throw new Error("getting data error");
       }
       const data = await res.json();
-      setIsLoading(false);
-      setPostData(data.records);
+      const latestPostData = data.records.sort(
+        (a, b) => new Date(b.createdTime) - new Date(a.createdTime)
+      );
+
+      setPostData(latestPostData);
     } catch (error) {
       console.error(error.message);
     }
@@ -55,9 +60,20 @@ const Home = () => {
     }
   };
 
+  const handleClick = (userId) => {
+    navigate(`/UserPokedex/${userId}`);
+  };
+
   useEffect(() => {
-    getPostData();
-    getUserData();
+    const fetchData = async () => {
+      try {
+        await Promise.all([getPostData(), getUserData()]);
+      } catch (error) {
+        console.log(error)("Error", error);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
 
   return isLoading ? (
@@ -103,8 +119,6 @@ const Home = () => {
           };
 
           const publicId = getPublicId(post.fields.img);
-          console.log(`its this ${post.fields.img}`);
-          console.log(publicId);
           const transformedImgUrl = publicId
             ? cld.image(publicId).resize(fill().width(250)).toURL()
             : "./images/fishbook-logo.png";
@@ -113,6 +127,7 @@ const Home = () => {
             <>
               <div key={post.id} className={styles.homeBody}>
                 <HomePokeCard
+                  func={() => handleClick(post.fields["Table 1"])}
                   pokedexCardContainer={styles.pokeCardContainer}
                   className={styles.userPokeCard}
                   imgClassName={styles.imgClassName}

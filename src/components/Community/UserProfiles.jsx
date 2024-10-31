@@ -45,12 +45,18 @@ const UserProfiles = () => {
     <>
       <div className={styles.profileHeader}>
         <TypographyHeader
-          headerMsg="Connect with passionate Anglers today"
+          headerMsg={[
+            "Connect.",
+            1000,
+            "Join passionate Anglers today.",
+            1000,
+            "Get Connected.",
+          ]}
           fontstyle={{
-            fontFamily: "Helvetica Neue",
+            color: "var(--white)",
             fontSize: "40px",
-            fontWeight: "500",
-            lineHeight: "40px",
+            fontFamily: "var(--stac)",
+            fontWeight: "600",
           }}
           speed={30}
           repeat={0}

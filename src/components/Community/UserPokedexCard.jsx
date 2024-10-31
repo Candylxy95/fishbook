@@ -40,25 +40,62 @@ const UserPokedexCard = (props) => {
                       <h5>
                         {userpost.fields.fishtype}{" "}
                         <p style={{ fontSize: "16px" }}>
-                          {userpost?.fields?.status}
+                          {userpost?.fields?.status === "Abundant" ? (
+                            <p style={{ color: "#2B9EB3" }}>Abundant</p>
+                          ) : userpost?.fields?.status === "Common" ? (
+                            <p style={{ color: "#78C247" }}>Common</p>
+                          ) : userpost?.fields?.status === "Uncommon" ? (
+                            <p style={{ color: "#CFD11A" }}>Uncommon</p>
+                          ) : userpost?.fields?.status === "Rare" ? (
+                            <p style={{ color: "#D9594C" }}>Rare</p>
+                          ) : userpost?.fields?.status === "Rare" ? (
+                            <p style={{ color: "#F84AA7" }}>Very Rare</p>
+                          ) : userpost?.fields?.status === "Extremely Rare" ? (
+                            <p style={{ color: "#753742" }}>Extremely Rare</p>
+                          ) : (
+                            <p style={{ color: "#553EA3" }}>Mysterious</p>
+                          )}
                         </p>
                       </h5>
                     </span>
                   </div>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
-                  <p>Fight: {userpost.fields.fightrate}</p>
-                  <p>Location: {userpost.fields.location}</p>
+                <div
+                  style={{
+                    paddingLeft: "20px",
+                    lineHeight: "5px",
+                    fontSize: "14px",
+                  }}
+                >
+                  <p>
+                    Fight: <b>{userpost.fields.fightrate}</b>
+                  </p>
+                  <p>
+                    Location: <b>{userpost.fields.location}</b>
+                  </p>
                 </div>
-                <p style={{ paddingLeft: "10px" }}>{userpost.fields.msg}</p>
+                <p
+                  style={{
+                    paddingLeft: "20px",
+                    paddingTop: "15px",
+                    color: "var(--gwey)",
+                  }}
+                >
+                  {userpost.fields.msg}
+                </p>
                 <div
                   className={styles.dateAndBtn}
-                  style={{ paddingRight: "10px" }}
+                  style={{
+                    paddingRight: "20px",
+                    fontSize: "14px",
+                    color: "var(--gwey)",
+                  }}
                 >
-                  <p style={{ paddingLeft: "10px" }}>{userpost.fields.date}</p>
+                  <p style={{ paddingLeft: "20px" }}>{userpost.fields.date}</p>
                   <p>{userpost.fields.username}</p>
                   {props.setUpdateBtnClicked && (
                     <button
+                      style={{ marginBottom: "20px" }}
                       className={styles.updateBtn}
                       onClick={() => props.delPostData(userpost.id)}
                     >

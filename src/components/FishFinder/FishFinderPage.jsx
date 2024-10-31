@@ -12,7 +12,6 @@ const FishFinderPage = () => {
   const [displayFishCards, setDisplayFishCards] = useState([]);
   const [showFishQuestCard, setShowFishQuestCard] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [isImageLoading, setIsImageLoading] = useState(true);
   const fishDataRef = useRef();
   const navigate = useNavigate();
 
@@ -31,9 +30,6 @@ const FishFinderPage = () => {
         throw new Error("no fishy data for you");
       }
       const data = await res.json();
-      // const fishWithConservationStatus = data.filter(
-      //   (fishData) => fishData.meta && fishData.meta.conservation_status
-      // ); //grab only fishes with conservation status
 
       setFishesData(data);
     } catch (error) {
@@ -47,13 +43,17 @@ const FishFinderPage = () => {
   const randomFishQuest = fishesData.length > 0 ? fishesData[randomIdx] : null;
 
   const handleGo = () => {
-    const inputKeyword = fishDataRef.current?.value.toLowerCase();
-    const matchingKeyword = fishesData.filter((fishData) =>
-      fishData.name.toLowerCase().includes(inputKeyword)
-    );
-    setDisplayFishCards(matchingKeyword);
-    setShowFishQuestCard(false);
-    fishDataRef.current.value = "";
+    if (!fishDataRef.current.value) {
+      return;
+    } else {
+      const inputKeyword = fishDataRef.current?.value.toLowerCase();
+      const matchingKeyword = fishesData.filter((fishData) =>
+        fishData.name.toLowerCase().includes(inputKeyword)
+      );
+      setDisplayFishCards(matchingKeyword);
+      setShowFishQuestCard(false);
+      fishDataRef.current.value = "";
+    }
   };
 
   const handleQuestClick = (fishType) => {
@@ -64,10 +64,6 @@ const FishFinderPage = () => {
   const handleCompleteClick = (fishType) => {
     setSelectedFish(fishType);
     navigate("/createpost", { state: { defaultValue: fishType } });
-  };
-
-  const handleImageLoad = () => {
-    setIsImageLoading(false);
   };
 
   useEffect(() => {
@@ -112,6 +108,7 @@ const FishFinderPage = () => {
               "./images/fishimgplaceholder.png"
             }
             fishName={randomFishQuest?.name}
+            fishCardBtns="fishCardBtns"
             rarity={
               randomFishQuest?.meta.conservation_status?.includes(
                 "Least Concern"
@@ -210,9 +207,10 @@ const FishFinderPage = () => {
     <div
       style={{
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
         height: "80vh",
+        width: "100vw",
       }}
     >
       <LoadingSpinner />

@@ -1,11 +1,10 @@
 import React from "react";
-import styles from "./Home.module.css";
 import Stats from "../Community/Stats";
 
 const HomePokeCard = (props) => {
   return (
     <>
-      <div className={props.pokedexCardContainer}>
+      <div className={props.pokedexCardContainer} onClick={props.func}>
         <div>
           <img
             src={props.img || "../images/fishbook-logo"}
