@@ -7,7 +7,7 @@ import LoadingSpinner from "./LoadingSpinner";
 const UploadImage = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const cld = new Cloudinary({
-    cloud: { cloudName: "dxbp8cza1" },
+    cloud: { cloudName: import.meta.env.VITE_CLOUDNAME },
   });
   const [photoImage, setPhotoImage] = useState("");
 

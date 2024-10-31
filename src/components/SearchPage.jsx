@@ -135,7 +135,7 @@ const SearchPage = () => {
       try {
         await Promise.all([getPostData(), getUserData(), getFishesData()]);
       } catch (error) {
-        console.log(error)("Error", error);
+        console.error(error.message);
       }
       setIsLoading(false);
     };
@@ -146,7 +146,6 @@ const SearchPage = () => {
     postSearchOnMount();
     userSearchOnMount();
     fishSearchOnMount();
-    console.log(defaultValue);
   }, [defaultValue, userData, postsData, fishesData]);
 
   return !isLoading ? (
@@ -259,9 +258,8 @@ const SearchPage = () => {
           </div>
           {displayUserCards.map((userInput) => {
             return (
-              <div className={styles.userCardContainer}>
+              <div key={userInput.id} className={styles.userCardContainer}>
                 <UserCard
-                  key={userInput.id}
                   func={() => handleClick(userInput.id)}
                   userCardImg={styles.userCardImg}
                   className={styles.userCard}
@@ -323,9 +321,11 @@ const SearchPage = () => {
           </div>
           {displayFishCards.map((displayFishCard) => {
             return (
-              <div className={styles.fishCardContainer}>
+              <div
+                key={displayFishCard.id}
+                className={styles.fishCardContainer}
+              >
                 <FishCard
-                  key={displayFishCard.id}
                   className={styles.fishCard}
                   imgClass={styles.fishImgClass}
                   src={

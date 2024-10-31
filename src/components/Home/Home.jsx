@@ -12,7 +12,9 @@ const Home = () => {
   const [postData, setPostData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
+  const cld = new Cloudinary({
+    cloud: { cloudName: import.meta.env.VITE_CLOUDNAME },
+  });
 
   const getPostData = async () => {
     try {
@@ -69,7 +71,7 @@ const Home = () => {
       try {
         await Promise.all([getPostData(), getUserData()]);
       } catch (error) {
-        console.log(error)("Error", error);
+        console.error(error.message);
       }
       setIsLoading(false);
     };

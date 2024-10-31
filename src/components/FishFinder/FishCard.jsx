@@ -10,7 +10,7 @@ const FishCard = (props) => {
       </div>
       <div>
         <h3>{props.fishName}</h3>
-        <p>Status: {props.rarity}</p>
+        <div>Status: {props.rarity}</div>
       </div>
       <div className={props.fishCardBtns}>
         <button className="questOnBtn" onClick={props.questClick}>

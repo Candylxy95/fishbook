@@ -36,11 +36,6 @@ const CreatePostModal = () => {
         throw new Error("no fishy data for you");
       }
       const data = await res.json();
-
-      // const fishWithConservationStatus = data.filter(
-      //   (fishData) => fishData.meta && fishData.meta.conservation_status
-      // ); //grab only fishes with conservation status
-
       setFishesData(data);
     } catch (error) {
       console.error(error.message);
@@ -179,7 +174,6 @@ const CreatePostModal = () => {
       !newPost.location ||
       validation !== "Valid User"
     ) {
-      console.log(`FISH IS ${newPost.fishtype}`);
       alert("Ensure all fields are filled with valid values.");
       return;
     }

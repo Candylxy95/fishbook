@@ -19,7 +19,9 @@ const UserPokedex = () => {
   const [updateBtnClicked, setUpdateBtnClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
-  const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
+  const cld = new Cloudinary({
+    cloud: { cloudName: import.meta.env.VITE_CLOUDNAME },
+  });
 
   const getUserData = async () => {
     try {
@@ -165,7 +167,7 @@ const UserPokedex = () => {
   }, []);
 
   return !isLoading ? (
-    userAcc.map((user, idx) => {
+    userAcc.map((user) => {
       const userPost = postData?.filter((post) =>
         post.fields["Table 1"]?.includes(user.id)
       );
@@ -192,7 +194,7 @@ const UserPokedex = () => {
 
       return (
         <>
-          <div className={styles.userProfileCards} key={idx}>
+          <div className={styles.userProfileCards} key={user.id}>
             <div className={styles.headerDiv}>
               <TypographyHeader
                 headerMsg={`${user.fields.username.toUpperCase()}'s FishDex`}

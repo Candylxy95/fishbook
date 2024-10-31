@@ -32,7 +32,7 @@ const UserCard = (props) => {
         <img src={props.src} className={props.actualImg} />
       </div>
       <div className={props.statsClass}>
-        <p className={props.userStatusClass}>{props.userStatus}</p>
+        <div className={props.userStatusClass}>{props.userStatus}</div>
         <div className={props.statsClassChild}>
           <img
             src={props.trophyimg}

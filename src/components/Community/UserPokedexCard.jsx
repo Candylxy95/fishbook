@@ -4,7 +4,9 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const UserPokedexCard = (props) => {
-  const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
+  const cld = new Cloudinary({
+    cloud: { cloudName: import.meta.env.VITE_CLOUDNAME },
+  });
   return (
     <>
       <div className={props.pokedexCardContainer}>
@@ -19,8 +21,6 @@ const UserPokedexCard = (props) => {
             };
 
             const publicId = getPublicId(userpost.fields.img);
-            console.log(`its this ${userpost.fields.img}`);
-            console.log(publicId);
             const transformedDPurl = publicId
               ? cld.image(publicId).resize(fill().width(450)).toURL()
               : "./images/fishbook-logo.png";
@@ -37,9 +37,16 @@ const UserPokedexCard = (props) => {
                   <div>
                     <span>
                       Caught:{" "}
-                      <h5>
-                        {userpost.fields.fishtype}{" "}
-                        <p style={{ fontSize: "16px" }}>
+                      <div>
+                        <p
+                          style={{
+                            fontSize: "18px",
+                            fontWeight: "500",
+                          }}
+                        >
+                          {userpost.fields.fishtype}
+                        </p>
+                        <div style={{ lineHeight: "5px" }}>
                           {userpost?.fields?.status === "Abundant" ? (
                             <p style={{ color: "#2B9EB3" }}>Abundant</p>
                           ) : userpost?.fields?.status === "Common" ? (
@@ -55,8 +62,8 @@ const UserPokedexCard = (props) => {
                           ) : (
                             <p style={{ color: "#553EA3" }}>Mysterious</p>
                           )}
-                        </p>
-                      </h5>
+                        </div>
+                      </div>
                     </span>
                   </div>
                 </div>

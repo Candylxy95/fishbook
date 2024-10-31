@@ -221,7 +221,7 @@ h1 {
   background: white;
   border-radius: 20px;
   z-index: 100;
-  height: 60%;
+  height: 70%;
   display: grid;
   grid-template-columns: 50% 50%;
   justify-content: center;
@@ -308,11 +308,6 @@ input[type="date"] {
   justify-self: center;
   margin-top: 50px;
 }
-/* .userProfileCards > h1 {
-  font-family: var(--stac);
-  letter-spacing: 5px;
-  font-size: 40px;
-} */
 
 .userProfileCard {
   padding: 15px;
@@ -334,17 +329,6 @@ input[type="date"] {
   align-items: center;
   border-radius: 0 0 10px 10px;
 }
-
-/* .AnglerComStats {
-  display: flex;
-  background-color: white;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 60px;
-  align-items: center;
-  border-radius: 0 0 10px 10px;
-} */
 
 .quest-modal-backdrop {
   position: fixed;

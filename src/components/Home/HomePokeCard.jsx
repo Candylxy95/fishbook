@@ -18,7 +18,7 @@ const HomePokeCard = (props) => {
               <h5 style={{ fontFamily: "var(--stac)", fontWeight: "600" }}>
                 {props.fishtype}{" "}
               </h5>
-              <p
+              <div
                 style={{
                   fontSize: "14px",
                   marginTop: "-10px",
@@ -26,7 +26,7 @@ const HomePokeCard = (props) => {
                 }}
               >
                 {props.fishstatus}
-              </p>
+              </div>
             </span>
           </div>
         </div>
@@ -57,8 +57,8 @@ const HomePokeCard = (props) => {
               justifyContent: "space-between",
             }}
           >
-            <p>{props.username}</p>
-            <p>{props.status}</p>
+            <p style={{ paddingBottom: "10px" }}>{props.username}</p>
+            {props.status}
           </div>
           <p
             style={{
