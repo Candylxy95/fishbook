@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 const QuestOverlay = (props) => {
   const [userData, setUserData] = useState([]);
@@ -7,6 +8,7 @@ const QuestOverlay = (props) => {
   const [validation, setValidation] = useState("");
   const [questList, setQuestList] = useState([]);
   const [questValid, setQuestValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getUserData = async () => {
     try {
@@ -24,6 +26,7 @@ const QuestOverlay = (props) => {
       }
       const data = await res.json();
       setUserData(data.records);
+      setIsLoading(false);
     } catch (error) {
       console.error(error.message);
     }
@@ -45,6 +48,7 @@ const QuestOverlay = (props) => {
       }
       const data = await res.json();
       setQuestList(data.records);
+      setIsLoading(false);
     } catch (error) {
       console.error(error.message);
     }
@@ -86,8 +90,17 @@ const QuestOverlay = (props) => {
     );
     if (user) {
       setValidation("Valid User");
+
+      const quest = questList.find(
+        (quest) =>
+          quest.fields["Table 1"]?.includes(user.id) &&
+          quest.fields.fishquest === props.fishtype
+      );
+
+      setQuestValid(!quest);
     } else {
       setValidation(e.target.value === "" ? "" : "Invalid User");
+      setQuestValid(false);
     }
   };
 
@@ -96,26 +109,22 @@ const QuestOverlay = (props) => {
       (user) => user.fields.username.toLowerCase() === input.toLowerCase()
     );
 
-    if (user) {
-      const quest = questList.find(
-        (quest) =>
-          quest.fields["Table 1"]?.includes(user.id) &&
-          quest.fields.fishquest === props.fishtype
-      );
-      if (!quest) {
-        addQuestData(user.id);
-        setInput("");
-      }
-    } else setQuestValid(false);
-    return;
+    if (user && questValid) {
+      addQuestData(user.id);
+      setInput("");
+      setQuestValid(true);
+    }
   };
 
   useEffect(() => {
     getUserData();
     getQuestData();
+    setQuestValid(true);
   }, []);
 
-  return (
+  useEffect(() => {}, [input]);
+
+  return !isLoading ? (
     <div className="quest-modal-backdrop">
       <div className="quest-modal">
         <div className="quest-input">
@@ -138,10 +147,14 @@ const QuestOverlay = (props) => {
             )}
           </div>
         </div>
-        {questValid ? (
+        {validation === "Valid User" && questValid ? (
           <h5>Add {props.fishtype} to Quest List?</h5>
-        ) : (
+        ) : validation === "Valid User" && !questValid ? (
           <h5>{props.fishtype} already exist in your Quest List</h5>
+        ) : validation === "" ? (
+          <h5>Please enter a username</h5>
+        ) : (
+          <h5>Username does not exist</h5>
         )}
         <div className="questModalBtnContainer">
           <button className="questModalBtn" onClick={() => handleClick()}>
@@ -155,6 +168,20 @@ const QuestOverlay = (props) => {
           </button>
         </div>
       </div>
+    </div>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        top: "40%",
+        left: "40%",
+        zIndex: "100",
+      }}
+    >
+      <LoadingSpinner />
     </div>
   );
 };

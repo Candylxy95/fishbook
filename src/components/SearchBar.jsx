@@ -4,15 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState([]);
+  const [noValue, setNoValue] = useState(true);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
+    setNoValue(false);
   };
 
   const handleBtnClick = (e) => {
     navigate("/searchpage", { state: { defaultValue: searchValue } });
     setSearchValue("");
+    setNoValue(true);
   };
 
   return (
@@ -23,7 +26,11 @@ const SearchBar = () => {
         onChange={handleChange}
         value={searchValue}
       ></input>
-      <button className={styles.navSearchBtn} onClick={handleBtnClick}>
+      <button
+        className={styles.navSearchBtn}
+        disabled={noValue}
+        onClick={handleBtnClick}
+      >
         &#8594;
       </button>
     </div>

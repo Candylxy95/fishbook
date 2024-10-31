@@ -1,8 +1,97 @@
-.profileHeader {
-  margin-top: 50px;
+.searchPage {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  min-height: 100vh;
+}
+
+.postRow {
+  display: flex;
+  flex-direction: row;
+  padding: 50px;
+  border-bottom: 1px solid var(--nude);
+  min-height: 30vh;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.pokeCardContainer {
   display: flex;
   flex-direction: column;
-  padding-left: 8%;
+  width: 200px;
+  height: 500px;
+  border-radius: 20px;
+  justify-content: center;
+  padding: 15px;
+  border: 1px solid var(--nude);
+}
+
+.fishRow {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 50px;
+  border-bottom: 1px solid var(--nude);
+  min-height: 500px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fishCardContainer {
+  width: 20%;
+}
+
+.fishCard {
+  width: 100%;
+  min-height: 300px;
+  text-align: center;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  justify-content: space-between;
+  border: 1px solid var(--nude);
+}
+
+.fishBtns {
+  display: none;
+}
+
+.fishImgClass {
+  border-radius: 20px;
+  width: 80%;
+}
+
+.userRow {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 50px;
+  border-bottom: 1px solid var(--nude);
+  min-height: 500px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.userCardContainer {
+  display: flex;
+  flex-direction: row;
+  width: 250px;
+  min-height: 500px;
+  border-radius: 20px;
+  justify-content: center;
+  padding: 15px;
+  border: 1px solid var(--nude);
+}
+
+.homeStats {
+  display: none;
+  column-gap: 5px;
+  padding-right: 15px;
+  justify-content: flex-end;
 }
 
 .userCards {
@@ -18,14 +107,6 @@
   height: 100vh;
 }
 
-.userCard {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  border-radius: 20px 20px 0 0;
-  height: auto;
-}
-
 .actualImg {
   border-radius: 20px;
   width: 100%;
@@ -39,15 +120,6 @@
 
 .userCard h5 {
   font-size: 16px;
-}
-
-.userCardImg {
-  text-align: center;
-  width: 100%;
-  height: 200%;
-  border: solid 1px rgb(255, 255, 255);
-  align-content: center;
-  border-radius: 20px;
 }
 
 .anglerComStats {
@@ -97,30 +169,6 @@
   align-items: center;
 }
 
-.userCard {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 50px 200px;
-}
-
-.homeBody {
-  display: flex;
-  padding: 20px;
-  position: relative;
-  min-height: 100%;
-}
-
-.pokeCardContainer {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  min-height: 100%;
-  border-radius: 20px;
-  justify-content: center;
-}
-
 .userPokeCard {
   text-align: center;
 }
@@ -130,17 +178,4 @@
   justify-self: center;
   width: 100%;
   min-height: 100%;
-}
-
-.statsDivWrapper {
-  width: 250px;
-  height: 100%;
-  position: absolute;
-}
-
-.homeStats {
-  display: flex;
-  column-gap: 5px;
-  padding-right: 15px;
-  justify-content: flex-end;
 }

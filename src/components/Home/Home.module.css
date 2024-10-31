@@ -1,3 +1,29 @@
+@keyframes bounce {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .userCard {
   display: flex;
   flex-direction: row;
@@ -8,9 +34,10 @@
 
 .homeBody {
   display: flex;
-  padding: 20px;
+  padding: 5px;
   position: relative;
   min-height: 100%;
+  animation: fadeIn 1s ease-in forwards;
 }
 
 .pokeCardContainer {
@@ -22,13 +49,9 @@
   justify-content: center;
 }
 
-/* .pokeCardContainer > :first-child {
-  width: 100%;
-  border: solid 1px black;
-  display: flex;
-  justify-content: center;
-  border-radius: 20px;
-} */
+.pokeCardContainer:hover {
+  animation: bounce 0.8s ease-in-out forwards;
+}
 
 .userPokeCard {
   text-align: center;
@@ -52,4 +75,14 @@
   column-gap: 5px;
   padding-right: 15px;
   justify-content: flex-end;
+}
+
+.typographyHeader {
+  width: 100%;
+  height: 170px;
+  display: fixed;
+  justify-content: center;
+  padding: 50px;
+  background-color: orangered;
+  background-position: contain;
 }

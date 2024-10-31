@@ -1,17 +1,35 @@
 import React from "react";
 import styles from "./UserPokedex.module.css";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const UserPokedexCard = (props) => {
+  const cld = new Cloudinary({ cloud: { cloudName: "dxbp8cza1" } });
   return (
     <>
       <div className={props.pokedexCardContainer}>
         {props.userPostArray?.length > 0 ? (
           props.userPostArray?.map((userpost) => {
+            const getPublicId = (url) => {
+              const cleanedUrl = url.split("?")[0];
+              const parts = cleanedUrl.split("/upload/");
+              if (parts[1]) {
+                return parts[1].split(/[/?]/).pop();
+              }
+            };
+
+            const publicId = getPublicId(userpost.fields.img);
+            console.log(`its this ${userpost.fields.img}`);
+            console.log(publicId);
+            const transformedDPurl = publicId
+              ? cld.image(publicId).resize(fill().width(450)).toURL()
+              : "./images/fishbook-logo.png";
+
             return (
               <div key={userpost.id}>
                 <div>
                   <img
-                    src={userpost.fields.img || "../images/fishbook-logo"}
+                    src={transformedDPurl || "../images/fishbook-logo"}
                     className={props.imgClassName}
                   />
                 </div>
@@ -42,7 +60,7 @@ const UserPokedexCard = (props) => {
                   {props.setUpdateBtnClicked && (
                     <button
                       className={styles.updateBtn}
-                      onClick={props.delPostData(userpost.id)}
+                      onClick={() => props.delPostData(userpost.id)}
                     >
                       Delete
                     </button>

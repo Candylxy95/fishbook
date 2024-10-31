@@ -16,14 +16,14 @@ const HomePokeCard = (props) => {
           <div>
             <span>
               Caught:{" "}
-              <h5 style={{ fontFamily: "var(--stac)", letterSpacing: "3px" }}>
+              <h5 style={{ fontFamily: "var(--stac)", fontWeight: "600" }}>
                 {props.fishtype}{" "}
               </h5>
               <p
                 style={{
                   fontSize: "14px",
                   marginTop: "-10px",
-                  fontWeight: "bolder",
+                  fontStyle: "italic",
                 }}
               >
                 {props.fishstatus}

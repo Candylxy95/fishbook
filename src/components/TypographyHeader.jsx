@@ -8,7 +8,7 @@ const TypographyHeader = (props) => {
       wrapper="span"
       speed={props.speed}
       style={props.fontstyle}
-      repeat={0}
+      repeat={props.repeat}
       cursor={false}
     />
   );

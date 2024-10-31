@@ -9,6 +9,7 @@ import UserPokedex from "./components/Community/UserPokedex";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound";
 import SearchPage from "./components/SearchPage";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="/searchpage" element={<SearchPage />} />
+        <Route path="/loadingspinner" element={<LoadingSpinner />} />
       </Routes>
     </div>
   );

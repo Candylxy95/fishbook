@@ -1,36 +1,106 @@
 .div {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: var(--black);
+  width: 100%;
+  height: 100vh;
 }
 
 .formContainer {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  margin-top: 50px;
-  width: 30%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  height: 60%;
+  width: 60%;
+  column-gap: 50px;
 }
 
 .forms {
+  background: white;
+  border-radius: 20px;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.forms > input,
+.forms > textarea {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 5px 40px;
+  background-color: white;
+  border-radius: 20px;
+  height: 50px;
+  border: 1px solid var(--dgray);
+  box-shadow: none;
+  padding: 0 20px;
+}
+
+.forms > textarea {
+  height: 80px;
+  padding-top: 10px;
 }
 
 .joinNowBtn {
-  color: var(--white);
-  font-family: "Staatliches", serif;
-  letter-spacing: 3px;
-  background-color: var(--black);
-  height: 100%;
-  width: 100%;
   border-style: none;
-  transition: background 1s ease;
   border-radius: 20px;
+  width: 140px;
+  height: 50px;
+  color: var(--offwhite);
+  font-family: var(--stac);
+  background-color: var(--black);
+  transition: background 1s ease;
+  justify-self: center;
 }
 
 .joinNowBtn:hover {
   background-color: orangered;
+}
+
+.uploadPhoto {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .div {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--black);
+  }
+
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    margin-top: 50px;
+    width: 30%;
+  }
+
+  .forms {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .joinNowBtn {
+    color: var(--white);
+    font-family: var(--stac);
+    background-color: var(--black);
+    height: 100%;
+    width: 100%;
+    border-style: none;
+    transition: background 1s ease;
+    border-radius: 20px;
+  }
+
+  .joinNowBtn:hover {
+    background-color: orangered;
+  }
 }

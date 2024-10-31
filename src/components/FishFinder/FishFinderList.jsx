@@ -41,7 +41,7 @@ const FishFinderList = (props) => {
                 }
                 fishName={displayFishCard?.name}
                 rarity={
-                  displayFishCard?.meta.conservation_status.includes(
+                  displayFishCard?.meta.conservation_status?.includes(
                     "Least Concern"
                   ) ? (
                     <span
@@ -53,7 +53,7 @@ const FishFinderList = (props) => {
                     >
                       Abundant
                     </span>
-                  ) : displayFishCard?.meta.conservation_status.includes(
+                  ) : displayFishCard?.meta.conservation_status?.includes(
                       "secure"
                     ) ? (
                     <span
@@ -65,7 +65,7 @@ const FishFinderList = (props) => {
                     >
                       Common
                     </span>
-                  ) : displayFishCard?.meta.conservation_status.includes(
+                  ) : displayFishCard?.meta.conservation_status?.includes(
                       "Near Threatened"
                     ) ? (
                     <span
@@ -77,7 +77,7 @@ const FishFinderList = (props) => {
                     >
                       Uncommon
                     </span>
-                  ) : displayFishCard?.meta.conservation_status.includes(
+                  ) : displayFishCard?.meta.conservation_status?.includes(
                       "Vulnerable"
                     ) ? (
                     <span
@@ -89,7 +89,7 @@ const FishFinderList = (props) => {
                     >
                       Rare
                     </span>
-                  ) : displayFishCard?.meta.conservation_status.includes(
+                  ) : displayFishCard?.meta.conservation_status?.includes(
                       "Endangered"
                     ) ? (
                     <span
@@ -101,7 +101,7 @@ const FishFinderList = (props) => {
                     >
                       Very Rare
                     </span>
-                  ) : displayFishCard?.meta.conservation_status.includes(
+                  ) : displayFishCard?.meta.conservation_status?.includes(
                       "Critically Endangered"
                     ) ? (
                     <span

@@ -6,13 +6,13 @@ const FishCard = (props) => {
       <div>
         <h1>{props.msg}</h1>
 
-        <img src={props.src} />
+        <img src={props.src} className={props.imgClass} />
       </div>
       <div>
         <h3>{props.fishName}</h3>
         <p>Status: {props.rarity}</p>
       </div>
-      <div className="fishCardBtns">
+      <div className={`"fishCardBtns" ${props.fishBtns}`}>
         <button className="questOnBtn" onClick={props.questClick}>
           Quest On
         </button>

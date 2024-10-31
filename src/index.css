@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
 :root {
   --black: #252525;
+  --gwey: #6b6b6b;
   --offwhite: rgb(245, 245, 247);
   --white: rgb(255, 255, 255);
   --nude: #dedfe3;
@@ -9,7 +11,19 @@
   --gray: #f0f0f06a;
   --nudeopaque: #efe5dc;
   --arch: "Archivo Black", serif;
-  --stac: "Staatliches", sans-serif;
+  --stac: "Montserrat", sans-serif;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
 }
 
 * {
@@ -35,8 +49,9 @@ body {
 
 h1 {
   /* font-family: "Staatliches", sans-serif; */
-  font-family: "Archivo Black", serif;
-  font-size: 200%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #434343;
 }
 
 .fishFinderPage {
@@ -55,22 +70,28 @@ h1 {
 
 .fishFinderInput {
   width: 100%;
-  height: 100%;
+  height: 50px;
+  border-radius: 20px 0 0 20px;
+  padding: 15px;
+  border: solid 1px var(--gwey);
+  border-right: none;
 }
 
 .fishFinderBtn {
   color: var(--white);
-  font-family: "Archivo Black", serif;
   background-color: var(--black);
   height: 100%;
   width: 100%;
   border-style: none;
   transition: background 1s ease;
+  border-radius: 0 20px 20px 0px;
+  border: solid 1px var(--black);
 }
 
 .fishFinderBtn:hover,
 .questModalBtn:hover {
   background-color: orangered;
+  border: solid 1px var(--black);
 }
 
 .fishCard {
@@ -80,7 +101,6 @@ h1 {
   background-color: var(--nude);
   width: auto;
   height: auto;
-  display: flex;
   justify-content: center;
   row-gap: 17px;
   border-radius: 10px;
@@ -129,7 +149,7 @@ h1 {
   align-content: center;
   justify-items: center;
   display: grid;
-  grid-template-rows: 65% 25% 10%;
+  grid-template-rows: 60% 25% 15%;
   padding-top: 20px;
 }
 
@@ -159,14 +179,14 @@ h1 {
 .questOnBtn,
 .completeBtn {
   border-style: none;
-  border-radius: 5px;
-  width: 100px;
-  height: 30px;
+  border-radius: 20px;
+  width: 140px;
+  height: 50px;
   color: var(--offwhite);
-  font-family: "Staatliches", serif;
-  letter-spacing: 3px;
+  font-family: var(--stac);
   background-color: var(--black);
   transition: background 1s ease;
+  justify-self: center;
 }
 
 .questOnBtn:hover,
@@ -180,60 +200,8 @@ h1 {
   width: 100%;
   margin-top: 20px;
   justify-content: space-around;
-  padding: 0 15px 30px 0;
+  padding: 0 15px 30px 15px;
 }
-
-/* .profileHeader {
-  margin-top: 50px;
-  width: 350px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.userCards {
-  margin-top: 50px;
-  padding: 20px 300px;
-  display: grid;
-  grid-template-columns: repeat(5, 20%);
-  column-gap: 30px;
-  row-gap: 30px;
-  background-image: url(/images/oceanwaters.png);
-  background-size: cover;
-  height: 100vh;
-}
-
-.userCard {
-  background-color: var(--nude);
-  display: grid;
-  grid-template-rows: 15% 35% 40% 10%;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  height: 450px;
-  position: relative;
-  padding: 15px;
-}
-
-.userCardImg {
-  text-align: center;
-} */
-
-/* .userCardBtn {
-  z-index: 1;
-  position: absolute;
-  border-style: none;
-  border-radius: 5px;
-  width: 100px;
-  height: 30px;
-  color: var(--offwhite);
-  font-family: "Staatliches", serif;
-  letter-spacing: 3px;
-  background-color: var(--black);
-} */
 
 .createPostDisplay {
   position: fixed;
@@ -246,33 +214,66 @@ h1 {
   justify-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .createPostForm {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  width: 30%;
-  background: var(--nudeopaque);
+  background: white;
   border-radius: 20px;
   z-index: 100;
-  align-content: center;
-  min-height: 100%;
-  overflow-y: scroll;
+  height: 60%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
 }
 
 .createPostInput {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 5px 40px;
+}
+
+.createPostInput > input,
+.createPostInput > select,
+.createPostInput > textarea,
+.createPostInput > label {
+  background-color: white;
+  border-radius: 20px;
+  height: 50px;
+  border: 1px solid var(--dgray);
+  box-shadow: none;
   padding: 0 20px;
 }
 
-/*
-display: grid;
-grid-template-columns: 30% 70%;
-align-items: center;
-*/
+input[type="date"] {
+  color: var(--gwey);
+}
+
+.createPostInput > label {
+  text-align: center;
+  align-content: center;
+  background-color: #252525;
+  color: var(--white);
+  font-family: var(--stac);
+  transition: background 1s ease;
+}
+
+.createPostInput > select {
+  color: var(--gwey);
+}
+
+.createPostInput > label:hover {
+  background-color: orangered;
+}
+
+.createPostInput > textarea {
+  height: 80px;
+  padding-top: 10px;
+}
 
 .pokecardstatus {
   background-color: var(--nude);
@@ -384,12 +385,11 @@ align-items: center;
 
 .questModalBtn {
   border-style: none;
-  border-radius: 5px;
+  border-radius: 20px;
   width: 140px;
   height: 50px;
   color: var(--offwhite);
-  font-family: "Staatliches", serif;
-  letter-spacing: 3px;
+  font-family: var(--stac);
   background-color: var(--black);
   transition: background 1s ease;
 }
@@ -405,4 +405,39 @@ align-items: center;
   display: flex;
   justify-content: center;
   margin: 10px 25%;
+}
+
+@media (max-width: 600px) {
+  .createPostDisplay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.7);
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .createPostForm {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 30%;
+    background: var(--nudeopaque);
+    border-radius: 20px;
+    z-index: 100;
+    align-content: center;
+    min-height: 100%;
+    overflow-y: scroll;
+  }
+
+  .createPostInput {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
 }

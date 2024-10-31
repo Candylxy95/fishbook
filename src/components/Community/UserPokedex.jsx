@@ -133,7 +133,6 @@ const UserPokedex = () => {
         throw new Error("getting data error");
       }
       getUserData();
-      
     } catch (error) {
       console.error(error.message);
     }
@@ -144,8 +143,6 @@ const UserPokedex = () => {
       setUpdateBtnClicked(true);
     } else setUpdateBtnClicked(false);
   };
-
-
 
   const handleCompleteClick = (fishType) => {
     navigate("/createpost", { state: { defaultValue: fishType } });
@@ -185,7 +182,6 @@ const UserPokedex = () => {
       : "./images/fishbook-logo.png";
 
     console.log(transformedDPurl);
-
     return (
       <>
         <div className={styles.userProfileCards} key={idx}>
@@ -198,6 +194,7 @@ const UserPokedex = () => {
                 fontSize: "40px",
                 fontWeight: "500",
               }}
+              repeat={0}
             />
             <button className={styles.updateBtn} onClick={handleUpdateBtn}>
               Update

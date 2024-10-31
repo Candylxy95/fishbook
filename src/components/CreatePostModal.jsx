@@ -37,11 +37,11 @@ const CreatePostModal = () => {
       }
       const data = await res.json();
 
-      const fishWithConservationStatus = data.filter(
-        (fishData) => fishData.meta && fishData.meta.conservation_status
-      ); //grab only fishes with conservation status
+      // const fishWithConservationStatus = data.filter(
+      //   (fishData) => fishData.meta && fishData.meta.conservation_status
+      // ); //grab only fishes with conservation status
 
-      setFishesData(fishWithConservationStatus);
+      setFishesData(data);
     } catch (error) {
       console.error(error.message);
     }
@@ -200,82 +200,108 @@ const CreatePostModal = () => {
   return (
     <div className="createPostDisplay">
       <div className="createPostForm">
-        <div className="createPostInput">
-          <h1 style={{ textAlign: "center" }}>Share your awesome catch</h1>
-          <UploadImage
-            photoContainer="photoContainer"
-            msg="Upload your catch"
-            func={handleImgChange}
-          />
-        </div>
-        <div className="createPostInput">
-          <label>Username: </label>
-          <input
-            name="username"
-            placeholder="Enter your username"
-            value={nameInput}
-            onChange={handleNameChange}
-          />
-          <div>
-            {validation === "Valid User" ? (
-              <p style={{ color: "green" }}>{validation}</p>
-            ) : validation === "Invalid User" ? (
-              <p style={{ color: "red" }}>Invalid User</p>
-            ) : (
-              <p></p>
-            )}
+        <div>
+          <div className="createPostInput">
+            <h1 style={{ textAlign: "center" }}>Share your awesome catch</h1>
+            <UploadImage
+              photoContainer="photoContainer"
+              msg="Upload your catch"
+              func={handleImgChange}
+            />
           </div>
         </div>
-        <div className="createPostInput">
-          <label>Species: </label>
-          <select
-            name="fishtype"
-            type="text"
-            onChange={handleFishChange}
-            value={newPost.fishtype}
-          >
-            <option value={defaultValue}>
-              {defaultValue || "Select a Catch"}
-            </option>
-            {fishesData.map((fishData, idx) => {
-              return (
-                <option key={idx} value={fishData.name}>
-                  {fishData.name}
-                </option>
-              );
-            })}
-          </select>
-          <p style={{ color: "green" }}>{fishStatus}</p>
-        </div>
-        <div className="createPostInput">
-          <label>Location: </label>
-          <input
-            name="location"
-            type="text"
-            placeholder="Enter location"
-            value={newPost.location}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="createPostInput">
-          <label>Date: </label>
-          <input
-            name="date"
-            type="date"
-            placeholder="DD/MM/YY"
-            value={newPost.date}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="createPostInput">
-          <label>Rate the fight:</label>
-          <div className="fightRateBtn">
+        <div>
+          <div className="createPostInput">
+            <input
+              name="username"
+              placeholder="Username"
+              value={nameInput}
+              onChange={handleNameChange}
+            />
+            <div style={{ paddingLeft: "15px" }}>
+              {validation === "Valid User" ? (
+                <p style={{ color: "green" }}>{validation}</p>
+              ) : validation === "Invalid User" ? (
+                <p style={{ color: "red" }}>Invalid User</p>
+              ) : (
+                <p></p>
+              )}
+            </div>
+          </div>
+          <div className="createPostInput">
+            <select
+              name="fishtype"
+              type="text"
+              onChange={handleFishChange}
+              value={newPost.fishtype}
+            >
+              <option value={defaultValue}>
+                {defaultValue || "Select a Catch"}
+              </option>
+              {fishesData
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((fishData) => {
+                  return (
+                    <option key={fishData.id} value={fishData.name}>
+                      {fishData.name}
+                    </option>
+                  );
+                })}
+            </select>
+            {fishStatus === "Abundant" ? (
+              <p style={{ color: "#2B9EB3", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            ) : fishStatus === "Common" ? (
+              <p style={{ color: "#78C247", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            ) : fishStatus === "Uncommon" ? (
+              <p style={{ color: "#CFD11A", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            ) : fishStatus === "Vulnerable" ? (
+              <p style={{ color: "#D9594C", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            ) : fishStatus === "Very Rare" ? (
+              <p style={{ color: "#F84887", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            ) : fishStatus === "Extremely Rare" ? (
+              <p style={{ color: "#FFC60A", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            ) : (
+              <p style={{ color: "#553EA3", paddingLeft: "15px" }}>
+                {fishStatus}
+              </p>
+            )}
+          </div>
+          <div className="createPostInput">
+            <input
+              name="location"
+              type="text"
+              placeholder="Location"
+              value={newPost.location}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="createPostInput">
+            <input
+              name="date"
+              type="date"
+              value={newPost.date}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="createPostInput">
             <select
               name="fightrate"
               value={newPost.fightrate}
               onChange={handleChange}
             >
-              <option value="">Select a rating</option>
+              <option value="">Select a fight rate</option>
               <option value="Easy">Easy</option>
               <option value="Moderate">Moderate</option>
               <option value="Challenging">Challenging</option>
@@ -283,22 +309,22 @@ const CreatePostModal = () => {
               <option value="Brutal">Brutal</option>
             </select>
           </div>
-        </div>
-        <div className="createPostInput">
-          <textarea
-            name="msg"
-            type="text"
-            placeholder="Share something about your catch"
-            onChange={handleChange}
-            value={newPost.msg}
-          />
-          <div className="questModalBtnContainer">
-            <button className="questModalBtn" onClick={handleCreateBtn}>
-              Create Post!
-            </button>
-            <button className="questModalBtn" onClick={handleCancel}>
-              Cancel
-            </button>
+          <div className="createPostInput">
+            <textarea
+              name="msg"
+              type="text"
+              placeholder="Share something about your catch"
+              onChange={handleChange}
+              value={newPost.msg}
+            />
+            <div className="questModalBtnContainer">
+              <button className="questModalBtn" onClick={handleCreateBtn}>
+                Create
+              </button>
+              <button className="questModalBtn" onClick={handleCancel}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>

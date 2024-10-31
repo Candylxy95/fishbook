@@ -124,74 +124,80 @@ const JoinUs = () => {
       <TypographyHeader
         headerMsg={"Join our community of Anglers today"}
         speed={50}
+        repeat={0}
         fontstyle={{
-          fontFamily: "Helvetica Neue",
+          fontFamily: "Montserrat, sans-serif",
           fontSize: "40px",
-          fontWeight: "500",
-          lineHeight: "40px",
+          fontWeight: "600",
+          color: "var(--black)",
         }}
       />
       <div className={styles.formContainer}>
         <div className={styles.uploadPhoto}>
           <h1>Upload profile photo</h1>
           <UploadImage
-            photoContainer={styles.photoContainer}
+            photoContainer={"photoContainer"}
             func={handleImgChange}
             msg="Upload your profile photo"
           />
         </div>
-        <div className={styles.forms}>
-          <label htmlFor="username">Username: </label>
-          <input
-            name="username"
-            value={newUserInput.username}
-            placeholder="Enter a username"
-            type="text"
-            onChange={handleUserChange}
-          />
-          {validation === "Available" ? (
-            <p style={{ color: "green" }}>Available</p>
-          ) : validation === "Unavailable" ? (
-            <p style={{ color: "red" }}>Unavailable</p>
-          ) : validation === "Spaces" ? (
-            <p style={{ color: "red" }}>Spaces not allowed</p>
-          ) : (
-            <p></p>
-          )}
+        <div className={styles.secContainer}>
+          <div className={styles.forms}>
+            <input
+              name="username"
+              value={newUserInput.username}
+              placeholder="Enter a username"
+              type="text"
+              onChange={handleUserChange}
+            />
+            {validation === "Available" ? (
+              <p style={{ color: "green", paddingLeft: "15px" }}>Available</p>
+            ) : validation === "Unavailable" ? (
+              <p style={{ color: "red", paddingLeft: "15px" }}>Unavailable</p>
+            ) : validation === "Spaces" ? (
+              <p style={{ color: "red", paddingLeft: "15px" }}>
+                Spaces not allowed
+              </p>
+            ) : (
+              <p></p>
+            )}
+          </div>
+          <div className={styles.forms} style={{ marginTop: "-20px" }}>
+            <input
+              name="age"
+              value={newUserInput.age}
+              placeholder="Enter your age"
+              type="text"
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.forms}>
+            <input
+              name="country"
+              value={newUserInput.country}
+              placeholder="Enter location"
+              type="text"
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.forms}>
+            <textarea
+              name="msg"
+              value={newUserInput.msg}
+              placeholder="Share a little more about yourself with the community"
+              type="text"
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.forms} style={{ textAlign: "center" }}>
+            <button
+              className={styles.joinNowBtn}
+              onClick={addControlledUserInput}
+            >
+              Join Now
+            </button>
+          </div>
         </div>
-        <div className={styles.forms} style={{ marginTop: "-20px" }}>
-          <label htmlFor="age">Age: </label>
-          <input
-            name="age"
-            value={newUserInput.age}
-            placeholder="Enter your age"
-            type="text"
-            onChange={handleChange}
-          />
-        </div>
-        <div className={styles.forms}>
-          <label htmlFor="country">Country: </label>
-          <input
-            name="country"
-            value={newUserInput.country}
-            placeholder="Enter location"
-            type="text"
-            onChange={handleChange}
-          />
-        </div>
-        <div className={styles.forms}>
-          <label htmlFor="msg">Describe yourself: </label>
-          <textarea
-            name="msg"
-            value={newUserInput.msg}
-            placeholder="Share a little more about yourself with the community"
-            type="text"
-            onChange={handleChange}
-          />
-        </div>
-        <button className={styles.joinNowBtn} onClick={addControlledUserInput}>
-          Join Now!
-        </button>
       </div>
     </div>
   );

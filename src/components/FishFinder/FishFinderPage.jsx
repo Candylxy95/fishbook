@@ -3,16 +3,20 @@ import FishCard from "./FishCard";
 import FishFinderList from "./FishFinderList";
 import QuestModal from "../QuestModal";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
+
 const FishFinderPage = () => {
   const [showQuestModal, setShowQuestModal] = useState(false);
   const [selectedFish, setSelectedFish] = useState(""); //log fishtype name here
   const [fishesData, setFishesData] = useState([]);
   const [displayFishCards, setDisplayFishCards] = useState([]);
   const [showFishQuestCard, setShowFishQuestCard] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const fishDataRef = useRef();
   const navigate = useNavigate();
 
-  const getFishesData = async () => {
+  const getFishesData = async (signal) => {
     try {
       const res = await fetch(import.meta.env.VITE_SERVER + "/fishes", {
         method: "GET",
@@ -20,25 +24,27 @@ const FishFinderPage = () => {
           "x-rapidapi-host": "fish-species.p.rapidapi.com",
           "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
         },
+        signal,
       });
 
       if (!res.ok) {
         throw new Error("no fishy data for you");
       }
       const data = await res.json();
+      // const fishWithConservationStatus = data.filter(
+      //   (fishData) => fishData.meta && fishData.meta.conservation_status
+      // ); //grab only fishes with conservation status
 
-      const fishWithConservationStatus = data.filter(
-        (fishData) => fishData.meta && fishData.meta.conservation_status
-      ); //grab only fishes with conservation status
-
-      setFishesData(fishWithConservationStatus);
+      setFishesData(data);
     } catch (error) {
-      console.error(error.message);
+      if (error.name !== "AbortError") {
+        console.error(error.message);
+      }
     }
   };
 
   const randomIdx = Math.floor(Math.random() * fishesData.length);
-  const randomFishQuest = fishesData[randomIdx];
+  const randomFishQuest = fishesData.length > 0 ? fishesData[randomIdx] : null;
 
   const handleGo = () => {
     const inputKeyword = fishDataRef.current?.value.toLowerCase();
@@ -60,11 +66,25 @@ const FishFinderPage = () => {
     navigate("/createpost", { state: { defaultValue: fishType } });
   };
 
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+  };
+
   useEffect(() => {
-    getFishesData();
+    const controller = new AbortController();
+    const { signal } = controller;
+    getFishesData(signal);
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
-  return (
+  return !isLoading ? (
     <>
       {showQuestModal && (
         <QuestModal
@@ -93,7 +113,7 @@ const FishFinderPage = () => {
             }
             fishName={randomFishQuest?.name}
             rarity={
-              randomFishQuest?.meta.conservation_status.includes(
+              randomFishQuest?.meta.conservation_status?.includes(
                 "Least Concern"
               ) ? (
                 <span
@@ -105,7 +125,7 @@ const FishFinderPage = () => {
                 >
                   Abundant
                 </span>
-              ) : randomFishQuest?.meta.conservation_status.includes(
+              ) : randomFishQuest?.meta.conservation_status?.includes(
                   "secure"
                 ) ? (
                 <span
@@ -117,7 +137,7 @@ const FishFinderPage = () => {
                 >
                   Common
                 </span>
-              ) : randomFishQuest?.meta.conservation_status.includes(
+              ) : randomFishQuest?.meta.conservation_status?.includes(
                   "Near Threatened"
                 ) ? (
                 <span
@@ -129,7 +149,7 @@ const FishFinderPage = () => {
                 >
                   Uncommon
                 </span>
-              ) : randomFishQuest?.meta.conservation_status.includes(
+              ) : randomFishQuest?.meta.conservation_status?.includes(
                   "Vulnerable"
                 ) ? (
                 <span
@@ -141,7 +161,7 @@ const FishFinderPage = () => {
                 >
                   Rare
                 </span>
-              ) : randomFishQuest?.meta.conservation_status.includes(
+              ) : randomFishQuest?.meta.conservation_status?.includes(
                   "Endangered"
                 ) ? (
                 <span
@@ -153,7 +173,7 @@ const FishFinderPage = () => {
                 >
                   Very Rare
                 </span>
-              ) : randomFishQuest?.meta.conservation_status.includes(
+              ) : randomFishQuest?.meta.conservation_status?.includes(
                   "Critically Endangered"
                 ) ? (
                 <span
@@ -186,6 +206,17 @@ const FishFinderPage = () => {
         )}
       </div>
     </>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80vh",
+      }}
+    >
+      <LoadingSpinner />
+    </div>
   );
 };
 

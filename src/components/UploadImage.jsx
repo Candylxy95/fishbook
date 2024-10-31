@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
+import LoadingSpinner from "./LoadingSpinner";
 
 const UploadImage = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const cld = new Cloudinary({
     cloud: { cloudName: "dxbp8cza1" },
   });
@@ -14,6 +16,7 @@ const UploadImage = (props) => {
     if (!file) {
       return;
     }
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -46,6 +49,7 @@ const UploadImage = (props) => {
     } catch (error) {
       console.error("error uploading image", error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -65,15 +69,16 @@ const UploadImage = (props) => {
               maxHeight: "250px",
             }}
           />
-        ) : (
+        ) : !isLoading ? (
           <div
             style={{
-              border: "solid 5px black",
+              border: "solid 1px #6b6b6b",
+              borderRadius: "20px",
               aspectRatio: "1/1",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              margin: "20px",
+              margin: "5px",
             }}
           >
             <img
@@ -81,16 +86,30 @@ const UploadImage = (props) => {
               style={{ width: "50%", height: "50%" }}
             />
           </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <LoadingSpinner />
+          </div>
         )}
       </div>
       <div className="createPostInput">
-        <label>{props.msg}</label>
         <input
           className={props.photoContainer}
+          id="img"
           name="img"
           type="file"
           onChange={uploadImage}
+          style={{ display: "none" }}
         />
+        <label htmlFor="img" className="uploadBtn">
+          Choose File
+        </label>
       </div>
     </>
   );
