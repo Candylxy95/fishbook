@@ -23,13 +23,13 @@ const UserPokedexCard = (props) => {
             const publicId = getPublicId(userpost.fields.img);
             const transformedDPurl = publicId
               ? cld.image(publicId).resize(fill().width(450)).toURL()
-              : "./images/fishbook-logo.png";
+              : "/images/fishbook-logo.png";
 
             return (
               <div key={userpost.id}>
                 <div>
                   <img
-                    src={transformedDPurl || "../images/fishbook-logo"}
+                    src={transformedDPurl || "/images/fishbook-logo"}
                     className={props.imgClassName}
                   />
                 </div>
@@ -132,7 +132,7 @@ const UserPokedexCard = (props) => {
               }}
             >
               <img
-                src="../images/fishiconblack.png"
+                src="/images/fishiconblack.png"
                 style={{ width: "100px", height: "auto" }}
               />
             </div>

@@ -13,7 +13,7 @@ const JoinUs = () => {
     age: "",
     country: "",
     msg: "",
-    img: "./images/fishbook-logo.png",
+    img: "/images/fishbook-logo.png",
   });
 
   const handleChange = (e) => {
@@ -92,7 +92,7 @@ const JoinUs = () => {
         age: "",
         country: "",
         msg: "",
-        img: "./images/fishbook-logo.png",
+        img: "/images/fishbook-logo.png",
       });
       navigate("/userprofiles");
     } catch (error) {

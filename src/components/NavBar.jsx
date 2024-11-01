@@ -9,7 +9,7 @@ const NavBar = () => {
       <ul className={styles.ul}>
         <li>
           <Link to="/">
-            <img src="../images/fishbook-logo.png" style={{ width: "45%" }} />
+            <img src="/images/fishbook-logo.png" style={{ width: "45%" }} />
           </Link>
         </li>
         <li>

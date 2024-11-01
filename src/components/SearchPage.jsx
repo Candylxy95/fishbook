@@ -298,8 +298,8 @@ const SearchPage = () => {
                   }
                   width="16px"
                   height="16px"
-                  questimg="../images/quest.png"
-                  trophyimg="../images/trophy.png"
+                  questimg="/images/quest.png"
+                  trophyimg="/images/trophy.png"
                   statsClass={styles.statsClass}
                   statsClassChild={styles.statsClassChild}
                 />
@@ -330,7 +330,7 @@ const SearchPage = () => {
                   imgClass={styles.fishImgClass}
                   src={
                     displayFishCard?.img_src_set["1.5x"] ||
-                    "./images/fishimgplaceholder.png"
+                    "/images/fishimgplaceholder.png"
                   }
                   fishCardBtns={styles.fishCardBtns}
                   fishName={displayFishCard?.name}

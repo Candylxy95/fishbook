@@ -190,7 +190,7 @@ const UserPokedex = () => {
             .image(publicId)
             .resize(fill().width(200).height(200).gravity("face"))
             .toURL()
-        : "./images/fishbook-logo.png";
+        : "/images/fishbook-logo.png";
 
       return (
         <div className={styles.userProfileCards} key={user.id}>

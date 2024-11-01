@@ -14,7 +14,7 @@ const CreatePostModal = () => {
     fightrate: "",
     msg: "",
     "Table 1": "",
-    img: "./images/fishbook-logo.png",
+    img: "/images/fishbook-logo.png",
   });
   const [usersData, setUsersData] = useState([]);
   const [fishesData, setFishesData] = useState([]);
@@ -95,7 +95,7 @@ const CreatePostModal = () => {
         fightrate: "",
         msg: "",
         "Table 1": "",
-        img: "./images/fishbook-logo.png",
+        img: "/images/fishbook-logo.png",
       });
       setNameInput("");
       setFishStatus("");

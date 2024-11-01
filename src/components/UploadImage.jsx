@@ -82,7 +82,7 @@ const UploadImage = (props) => {
             }}
           >
             <img
-              src="./images/uploadimage.png"
+              src="/images/uploadimage.png"
               style={{ width: "50%", height: "50%" }}
             />
           </div>

@@ -123,7 +123,7 @@ const Home = () => {
           const publicId = getPublicId(post.fields.img);
           const transformedImgUrl = publicId
             ? cld.image(publicId).resize(fill().width(250)).toURL()
-            : "./images/fishbook-logo.png";
+            : "/images/fishbook-logo.png";
 
           return (
             <div key={post.id} className={styles.homeBody}>

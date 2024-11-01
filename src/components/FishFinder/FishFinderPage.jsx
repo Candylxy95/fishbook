@@ -105,7 +105,7 @@ const FishFinderPage = () => {
             className="fishCard"
             src={
               randomFishQuest?.img_src_set["1.5x"] ||
-              "./images/fishimgplaceholder.png"
+              "/images/fishimgplaceholder.png"
             }
             fishName={randomFishQuest?.name}
             fishCardBtns="fishCardBtns"

@@ -7,7 +7,7 @@ const HomePokeCard = (props) => {
       <div className={props.pokedexCardContainer} onClick={props.func}>
         <div>
           <img
-            src={props.img || "../images/fishbook-logo"}
+            src={props.img || "/images/fishbook-logo"}
             className={props.imgClassName}
           />
         </div>

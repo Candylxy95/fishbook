@@ -106,8 +106,8 @@ const UserProfiles = () => {
                   }
                   width="16px"
                   height="16px"
-                  questimg="../images/quest.png"
-                  trophyimg="../images/trophy.png"
+                  questimg="/images/quest.png"
+                  trophyimg="/images/trophy.png"
                   statsClass={styles.statsClass}
                   statsClassChild={styles.statsClassChild}
                 />

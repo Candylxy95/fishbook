@@ -37,7 +37,7 @@ const FishFinderList = (props) => {
                 className="fishCardDisplay"
                 src={
                   displayFishCard?.img_src_set["1.5x"] ||
-                  "./images/fishimgplaceholder.png"
+                  "/images/fishimgplaceholder.png"
                 }
                 fishCardBtns="fishCardBtns"
                 fishName={displayFishCard?.name}
