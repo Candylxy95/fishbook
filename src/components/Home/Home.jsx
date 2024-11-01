@@ -126,94 +126,86 @@ const Home = () => {
             : "./images/fishbook-logo.png";
 
           return (
-            <>
-              <div key={post.id} className={styles.homeBody}>
-                <HomePokeCard
-                  func={() => handleClick(post.fields["Table 1"])}
-                  pokedexCardContainer={styles.pokeCardContainer}
-                  className={styles.userPokeCard}
-                  imgClassName={styles.imgClassName}
-                  status={
+            <div key={post.id} className={styles.homeBody}>
+              <HomePokeCard
+                func={() => handleClick(post.fields["Table 1"])}
+                pokedexCardContainer={styles.pokeCardContainer}
+                className={styles.userPokeCard}
+                imgClassName={styles.imgClassName}
+                status={
+                  userData.find((user) => user.fields.posts?.includes(post.id))
+                    ?.fields.posts?.length > 10 &&
+                  userData.find((user) => user.fields.posts?.includes(post.id))
+                    ?.fields.posts?.length <= 20 ? (
+                    <p style={{ color: "#987284" }}>Amateur</p>
+                  ) : userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length > 20 &&
                     userData.find((user) =>
                       user.fields.posts?.includes(post.id)
-                    )?.fields.posts?.length > 10 &&
+                    )?.fields.posts?.length <= 50 ? (
+                    <p style={{ color: "#C73E1D" }}>Adept</p>
+                  ) : userData.find((user) =>
+                      user.fields.posts?.includes(post.id)
+                    )?.fields.posts?.length > 50 &&
                     userData.find((user) =>
                       user.fields.posts?.includes(post.id)
-                    )?.fields.posts?.length <= 20 ? (
-                      <p style={{ color: "#987284" }}>Amateur</p>
-                    ) : userData.find((user) =>
-                        user.fields.posts?.includes(post.id)
-                      )?.fields.posts?.length > 20 &&
-                      userData.find((user) =>
-                        user.fields.posts?.includes(post.id)
-                      )?.fields.posts?.length <= 50 ? (
-                      <p style={{ color: "#C73E1D" }}>Adept</p>
-                    ) : userData.find((user) =>
-                        user.fields.posts?.includes(post.id)
-                      )?.fields.posts?.length > 50 &&
-                      userData.find((user) =>
-                        user.fields.posts?.includes(post.id)
-                      )?.fields.posts?.length <= 100 ? (
-                      <p style={{ color: "#C44900" }}>Master</p>
-                    ) : userData.find((user) =>
-                        user.fields.posts?.includes(post.id)
-                      )?.fields.posts?.length > 100 ? (
-                      <p style={{ color: "#345830" }}>Legendary</p>
-                    ) : (
-                      <p style={{ color: "#A0CED9" }}>Beginner</p>
-                    )
-                  }
-                  fishtype={post.fields.fishtype}
-                  username={
-                    userData.find((user) =>
+                    )?.fields.posts?.length <= 100 ? (
+                    <p style={{ color: "#C44900" }}>Master</p>
+                  ) : userData.find((user) =>
                       user.fields.posts?.includes(post.id)
-                    )?.fields.username
-                  }
-                  fightrate={post.fields.fightrate}
-                  age={
-                    userData.find((user) =>
-                      user.fields.posts?.includes(post.id)
-                    )?.fields.age
-                  }
-                  fishstatus={
-                    post.fields.status === "Abundant" ? (
-                      <p style={{ color: "#2B9EB3" }}>Abundant</p>
-                    ) : post.fields.status === "Common" ? (
-                      <p style={{ color: "#78C247" }}>Common</p>
-                    ) : post.fields.status === "Uncommon" ? (
-                      <p style={{ color: "#CFD11A" }}>Uncommon</p>
-                    ) : post.fields.status === "Rare" ? (
-                      <p style={{ color: "#D9594C" }}>Rare</p>
-                    ) : post.fields.status === "Rare" ? (
-                      <p style={{ color: "#F84AA7" }}>Very Rare</p>
-                    ) : post.fields.status === "Extremely Rare" ? (
-                      <p style={{ color: "#753742" }}>Extremely Rare</p>
-                    ) : (
-                      <p style={{ color: "#553EA3" }}>Mysterious</p>
-                    )
-                  }
-                  location={post.fields.location}
-                  msg={post.fields.msg}
-                  img={transformedImgUrl}
-                  date={post.fields.date}
-                  statsDivWrapper={styles.statsDivWrapper}
-                  homeStats={styles.homeStats}
-                  fishcount={
-                    userData.find((user) =>
-                      user.fields.posts?.includes(post.id)
-                    )?.fields.posts.length || 0
-                  }
-                  questcount={
-                    userData.find((user) =>
-                      user.fields.posts?.includes(post.id)
-                    )?.fields.questlist?.length || 0
-                  }
-                  width="16px"
-                  height="16px"
-                  fontSize="16px"
-                />
-              </div>
-            </>
+                    )?.fields.posts?.length > 100 ? (
+                    <p style={{ color: "#345830" }}>Legendary</p>
+                  ) : (
+                    <p style={{ color: "#A0CED9" }}>Beginner</p>
+                  )
+                }
+                fishtype={post.fields.fishtype}
+                username={
+                  userData.find((user) => user.fields.posts?.includes(post.id))
+                    ?.fields.username
+                }
+                fightrate={post.fields.fightrate}
+                age={
+                  userData.find((user) => user.fields.posts?.includes(post.id))
+                    ?.fields.age
+                }
+                fishstatus={
+                  post.fields.status === "Abundant" ? (
+                    <p style={{ color: "#2B9EB3" }}>Abundant</p>
+                  ) : post.fields.status === "Common" ? (
+                    <p style={{ color: "#78C247" }}>Common</p>
+                  ) : post.fields.status === "Uncommon" ? (
+                    <p style={{ color: "#CFD11A" }}>Uncommon</p>
+                  ) : post.fields.status === "Rare" ? (
+                    <p style={{ color: "#D9594C" }}>Rare</p>
+                  ) : post.fields.status === "Rare" ? (
+                    <p style={{ color: "#F84AA7" }}>Very Rare</p>
+                  ) : post.fields.status === "Extremely Rare" ? (
+                    <p style={{ color: "#753742" }}>Extremely Rare</p>
+                  ) : (
+                    <p style={{ color: "#553EA3" }}>Mysterious</p>
+                  )
+                }
+                location={post.fields.location}
+                msg={post.fields.msg}
+                img={transformedImgUrl}
+                date={post.fields.date}
+                statsDivWrapper={styles.statsDivWrapper}
+                homeStats={styles.homeStats}
+                fishcount={
+                  userData.find((user) => user.fields.posts?.includes(post.id))
+                    ?.fields.posts.length || 0
+                }
+                questcount={
+                  userData.find((user) => user.fields.posts?.includes(post.id))
+                    ?.fields.questlist?.length || 0
+                }
+                width="16px"
+                height="16px"
+                fontSize="16px"
+              />
+            </div>
           );
         })}
       </div>

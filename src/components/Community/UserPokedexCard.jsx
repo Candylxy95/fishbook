@@ -128,6 +128,7 @@ const UserPokedexCard = (props) => {
                 border: "solid 5px #252525",
                 padding: "20px 10px",
                 borderRadius: "100%",
+                marginTop: "40vh",
               }}
             >
               <img

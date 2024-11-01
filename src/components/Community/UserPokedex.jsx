@@ -193,82 +193,80 @@ const UserPokedex = () => {
         : "./images/fishbook-logo.png";
 
       return (
-        <>
-          <div className={styles.userProfileCards} key={user.id}>
-            <div className={styles.headerDiv}>
-              <TypographyHeader
-                headerMsg={`${user.fields.username.toUpperCase()}'s FishDex`}
-                fontstyle={{
-                  fontFamily: "var(--staac)",
-                  fontSize: "35px",
-                  fontWeight: "500",
-                }}
-                repeat={0}
-              />
-              <button className={styles.updateBtn} onClick={handleUpdateBtn}>
-                Update
-              </button>
-            </div>
-            <div className={styles.fishDexBody}>
-              <div>
-                <UserCard
-                  className={styles.userProfileCard}
-                  userCardImg={styles.userCardImg}
-                  userStatus={
-                    user.fields.posts?.length > 10 &&
-                    user.fields.posts?.length <= 20 ? (
-                      <p style={{ color: "#987284" }}>Amateur</p>
-                    ) : user.fields.posts?.length > 20 &&
-                      user.fields.posts?.length <= 50 ? (
-                      <p style={{ color: "#C73E1D" }}>Adept</p>
-                    ) : user.fields.posts?.length > 50 &&
-                      user.fields.posts?.length <= 100 ? (
-                      <p style={{ color: "#C44900" }}>Master</p>
-                    ) : user.fields.posts?.length > 100 ? (
-                      <p style={{ color: "#345830" }}>Legendary</p>
-                    ) : (
-                      <p style={{ color: "#A0CED9" }}>Beginner</p>
-                    )
-                  }
-                  userStatusClass={styles.userStatusClass}
-                  src={transformedDPurl}
-                  actualImg={styles.actualImg}
-                  userName={user.fields.username}
-                  age={user.fields.age}
-                  location={user.fields.country}
-                  msg={user.fields.msg}
-                  setUpdateBtnClicked={updateBtnClicked}
-                  handleBioUpdate={updateUserData}
-                />
-              </div>
-              <div>
-                {userPost && (
-                  <UserPokedexCard
-                    userPostArray={userPost}
-                    pokedexCardContainer={styles.pokedexCardContainer}
-                    className={styles.userPokedexCard}
-                    imgClassName={styles.imgClassName}
-                    setUpdateBtnClicked={updateBtnClicked}
-                    delPostData={delPostData}
-                  />
-                )}
-              </div>
-            </div>
-            <Stats
-              className="stats"
-              fishcount={user.fields.posts ? user.fields.posts.length : 0}
-              questcount={
-                user.fields.questlist ? user.fields.questlist?.length : 0
-              }
+        <div className={styles.userProfileCards} key={user.id}>
+          <div className={styles.headerDiv}>
+            <TypographyHeader
+              headerMsg={`${user.fields.username.toUpperCase()}'s FishDex`}
+              fontstyle={{
+                fontFamily: "var(--staac)",
+                fontSize: "35px",
+                fontWeight: "500",
+              }}
+              repeat={0}
             />
-
-            <QuestList
-              questArray={userQuests}
-              deleteFunc={delQuestData}
-              completeFunc={handleCompleteClick}
-            />
+            <button className={styles.updateBtn} onClick={handleUpdateBtn}>
+              Update
+            </button>
           </div>
-        </>
+          <div className={styles.fishDexBody}>
+            <div>
+              <UserCard
+                className={styles.userProfileCard}
+                userCardImg={styles.userCardImg}
+                userStatus={
+                  user.fields.posts?.length > 10 &&
+                  user.fields.posts?.length <= 20 ? (
+                    <p style={{ color: "#987284" }}>Amateur</p>
+                  ) : user.fields.posts?.length > 20 &&
+                    user.fields.posts?.length <= 50 ? (
+                    <p style={{ color: "#C73E1D" }}>Adept</p>
+                  ) : user.fields.posts?.length > 50 &&
+                    user.fields.posts?.length <= 100 ? (
+                    <p style={{ color: "#C44900" }}>Master</p>
+                  ) : user.fields.posts?.length > 100 ? (
+                    <p style={{ color: "#345830" }}>Legendary</p>
+                  ) : (
+                    <p style={{ color: "#A0CED9" }}>Beginner</p>
+                  )
+                }
+                userStatusClass={styles.userStatusClass}
+                src={transformedDPurl}
+                actualImg={styles.actualImg}
+                userName={user.fields.username}
+                age={user.fields.age}
+                location={user.fields.country}
+                msg={user.fields.msg}
+                setUpdateBtnClicked={updateBtnClicked}
+                handleBioUpdate={updateUserData}
+              />
+            </div>
+            <div>
+              {userPost && (
+                <UserPokedexCard
+                  userPostArray={userPost}
+                  pokedexCardContainer={styles.pokedexCardContainer}
+                  className={styles.userPokedexCard}
+                  imgClassName={styles.imgClassName}
+                  setUpdateBtnClicked={updateBtnClicked}
+                  delPostData={delPostData}
+                />
+              )}
+            </div>
+          </div>
+          <Stats
+            className="stats"
+            fishcount={user.fields.posts ? user.fields.posts.length : 0}
+            questcount={
+              user.fields.questlist ? user.fields.questlist?.length : 0
+            }
+          />
+
+          <QuestList
+            questArray={userQuests}
+            deleteFunc={delQuestData}
+            completeFunc={handleCompleteClick}
+          />
+        </div>
       );
     })
   ) : (
