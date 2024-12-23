@@ -1,10 +1,10 @@
-![FISHBOOK page](/images/profilepage.png)
+![FISHBOOK page](images/profilepage.png)
 
 # FISHBOOK
 
 Fishbook is an app created for passionate anglers to log catch datas and share their fishing records in a gamified manner. This app has been built using CSS, HTML, REACTJS, and made possible with databases, namely RapidAPI's **Fish species API**, Airtable and Cloudinary. Simply create a profile to start posting your catches or browse through list of fishes to add to your quest list.
 
-![FISHBOOK quest page](/images/questpage.png)
+![FISHBOOK quest page](images/questpage.png)
 
 ## App Demo
 

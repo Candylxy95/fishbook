@@ -16,7 +16,7 @@ const QuestList = (props) => {
   return (
     <div className={styles.questCard}>
       <h5>Quest List</h5>
-
+    
       {props.questArray.length > 0 ? (
         <>
           {showList && (
